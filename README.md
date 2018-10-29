@@ -1,6 +1,8 @@
-This is a lesson on tidying data. Specifically, what to do when a conceptual variable is spread out over multiple data frames and across 2 or more variables in a data frame.
+This is a lesson on tidying data, remixed from [Jenny Bryan's similar lesson using "Lord of the Rings" data](https://github.com/jennybc/lotr-tidy). Most text is Jenny's :)
 
-Data used: [words spoken](https://github.com/jennybc/lotr) by characters of different races and gender in the Lord of the Rings movie trilogy.
+Specifically, what to do when a conceptual variable is spread out over multiple data frames and across 2 or more variables in a data frame.
+
+Data used: [number of desserts baked in "The Great British Bake Off"](https://github.com/apreshill/bakeoff) by challenge (signature versus showstopper) and type (cakes versus pies/tarts).
 
   * [01-intro](01-intro.md) shows untidy and tidy data. Then we demonstrate how tidy data is more useful for analysis and visualization. Includes references, resources, and exercises.
   * [02-gather](02-gather.md) shows __how__ to tidy data, using `gather()` from the `tidyr` package. Includes references, resources, and exercises.
