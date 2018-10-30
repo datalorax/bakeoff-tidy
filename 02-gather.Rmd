@@ -222,10 +222,8 @@ Follow along with these code prompts:
 
 ```{r}
 # import flying etiquette data
-untidy_flyers <- read_csv("https://raw.githubusercontent.com/fivethirtyeight/data/master/flying-etiquette-survey/flying-etiquette.csv") %>% 
-  mutate_if(is.character, as.factor) %>%
-  # filter out those who have never flown on a plane
-  filter(`How often do you travel by plane?` != "Never")
+untidy_fly <- read_csv("https://raw.githubusercontent.com/fivethirtyeight/data/master/flying-etiquette-survey/flying-etiquette.csv") %>% 
+  mutate_if(is.character, as.factor)
 ```
 
 
@@ -233,12 +231,34 @@ untidy_flyers <- read_csv("https://raw.githubusercontent.com/fivethirtyeight/dat
 
 ```{r echo = FALSE}
 # select then gather questions about rudeness
-tidy_rude <- untidy_flyers %>% 
+tidy_rude <- untidy_fly %>% 
   select(RespondentID, contains("rude")) %>%
   gather(key = "question_asked", value = "answer", -RespondentID) %>% 
   mutate(rude_answer = if_else(str_detect(answer, "Yes"), 1, 0))
 
 ```
+
+* Answer some questions: how many respondents are there? how many respondents didn't answer any of the 9 questions? Try filtering out respondents who had missing answers for all 9 questions here.
+
+```{r echo = FALSE}
+# number of respondents
+n_distinct(tidy_rude$RespondentID)
+
+# some who didn't answer any of these questions
+tidy_rude %>% 
+  count(RespondentID, rude_answer) %>% 
+  filter(is.na(rude_answer)) %>% 
+  count(n)
+
+# filter out non-respondents
+tidy_rude <- tidy_rude %>% 
+  group_by(RespondentID) %>% 
+  filter(sum(is.na(rude_answer)) < 9)
+
+# now less respondents in sample
+n_distinct(tidy_rude$RespondentID)
+```
+
 
 * Summarize the data: `group_by` question, then calculate the mean of your new `rude_answer` column to get the proportions of respondents who endorsed "yes it is rude" for each question.
 
@@ -259,15 +279,15 @@ For more tweaking, you can use this code to redo your labels:
 ```{r echo = TRUE}
 abb_question <- tribble(
   ~label,
+  "be chatty with seatmate",
   "knowingly bring unruly children",
-  "wake someone up to go for a walk",
-  "recline your seat",
-  "wake someone up to go to the bathroom",
   "bring a baby on a plane",
   "ask to switch seats for friends",
-  "be chatty with seatmate",
+  "wake someone up to go to the bathroom",
+  "ask to switch seats for family",
   "move to an unsold seat",
-  "ask to switch seats for family"
+  "recline your seat",
+  "wake someone up to go for a walk"
 )
 rude_summarized <- tidy_rude %>% 
   group_by(question_asked) %>% 
@@ -277,7 +297,7 @@ rude_summarized <- tidy_rude %>%
 
 ```{r echo = FALSE, fig.height = 5, fig.width = 8}
 # recreate 538 bar chart
-ggplot(rude_summarized, aes(x = label, y = rude_prop)) +
+ggplot(rude_summarized, aes(x = fct_reorder(label, rude_prop), y = rude_prop)) +
   geom_col(fill = "dodgerblue", alpha = .5) +
   coord_flip(ylim = c(0, 1)) +
   labs(x = NULL, y = NULL) +
@@ -286,7 +306,6 @@ ggplot(rude_summarized, aes(x = label, y = rude_prop)) +
         axis.text.x=element_blank(),
         axis.ticks.x=element_blank())
 ```
-
 
 
 
