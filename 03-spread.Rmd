@@ -79,7 +79,7 @@ b_counts
 
 Again, we can squint hard at this `r nrow(b_counts)` row tibble, but if we want to look at numbers like this:
 
-[](https://fivethirtyeight.com/wp-content/uploads/2017/07/koeze-hickey-bachelor-3-update.png)
+![](https://fivethirtyeight.com/wp-content/uploads/2017/07/koeze-hickey-bachelor-3-update.png)
 
 We need to reshape this data (again).
 
