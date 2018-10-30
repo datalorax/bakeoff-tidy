@@ -1,4 +1,5 @@
 name: "bakeoff-tidy"
+output_dir: '.'
 navbar:
   title: "bakeoff-tidy"
   left:
@@ -12,3 +13,6 @@ output:
   html_document:
     theme: journal
     highlight: pygments
+    includes:
+      after_body: footer.html
+    lib_dir: site_libs
