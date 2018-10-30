@@ -14,6 +14,8 @@ This is a lesson on tidying data, remixed from [Jenny Bryan's similar lesson usi
 
 ```{r setup, include = FALSE, cache = FALSE}
 knitr::opts_chunk$set(error = TRUE, collapse = TRUE, comment = "#>", warning = FALSE, message = FALSE)
+library(DT)
+ggplot2::theme_set(ggplot2::theme_minimal())
 ```
 
 An important aspect of "writing data for computers" is to make your data __tidy__. Key features of __tidy__ data:
@@ -93,13 +95,16 @@ Follow along with these code prompts:
 * Use the following code to read in data used from several stories from [538](https://github.com/fivethirtyeight/data/tree/master/bachelorette) (Note: you'll get a bunch of parsing errors and that is OK to ignore):
 
 ```{r}
+# import bachelor data
 bach <- read_csv("https://raw.githubusercontent.com/fivethirtyeight/data/master/bachelorette/bachelorette.csv",
                          col_types = cols(SEASON = col_integer()))
+
 ```
 
 * Create a dataset that looks like this:
 
 ```{r echo = FALSE}
+# tidy bachelor data
 b_tidy <- bach %>% 
   filter(!SEASON == "SEASON") %>% 
   select(SHOW, SEASON, CONTESTANT, starts_with("ELIMINATION")) %>% 
@@ -107,11 +112,13 @@ b_tidy <- bach %>%
   mutate(week = str_replace(week, "-", "_"),
          week = parse_number(week))
 b_tidy
+
 ```
 
 Use this code template if you want some help getting there:
 
 ```{r eval = FALSE}
+# template code to tidy bachelor data
 b_tidy <- bach %>% 
   filter(!SEASON == "SEASON") %>% 
   select(SHOW, SEASON, CONTESTANT, starts_with("ELIMINATION")) %>% 
@@ -122,84 +129,174 @@ b_tidy <- bach %>%
   mutate(week = str_replace(week, "-", "_"),
          week = parse_number(week))
 b_tidy
-```
 
+```
 
 
 
 * Use the tidy dataset to answer the following questions:
 
 1. How many contestants were eliminated in week 3? What about for the Bachelor vs. the Bachelorette?
-1. Make a plot of the number of roses, facetted by show.
+1. Make a bar chart to show the number of roses given to contestants ("R1" is first impression rose, "R" is a normal rose), facetted by show.
+
+Some sample output you might want to aim for:
 
 ```{r, echo = FALSE}
+# eliminated in week 3
+b_tidy %>% 
+  mutate(elim = if_else(eliminated %in% c("R", "R1", "W"), 0, 1)) %>% 
+  count(week, elim) %>% 
+  filter(week == 3)
+
+# eliminated in week 3 by show
+b_tidy %>% 
+  mutate(elim = if_else(eliminated %in% c("R", "R1", "W"), 0, 1)) %>% 
+  count(SHOW, week, elim) %>% 
+  filter(week == 3)
+
+# roses received
 b_roses <- b_tidy %>% 
   filter(eliminated %in% c("R1", "R")) 
 ggplot(b_roses, aes(x = SEASON)) +
   geom_bar() +
   facet_wrap(~ SHOW)
+
 ```
 
 ### PDX Bike Counts
 
-update this link once up on github
+Follow along with these code prompts:
+
+* Use the following code to read in data used from the annual PDX Bike Count [538](https://github.com/fivethirtyeight/data/tree/master/bachelorette):
 
 ```{r}
-untidy_bikes <- read_csv("https://raw.githubusercontent.com/apreshill/bakeoff-tidy/master/data/untidy-bike-counts.csv")
+# import bike data
+untidy_bikes <- read_csv("https://raw.githubusercontent.com/apreshill/bakeoff-tidy/master/data/untidy-bike-counts.csv", 
+                         skip = 1,
+                         na = "-") %>% 
+  janitor::clean_names() # optional but highly recommended
+glimpse(untidy_bikes)
+
+```
+
+* Gather all the bike counts for years 2000-2017 (Hint: you may need to use a `mutate` with `parse_number` after the `gather`). Your finished tibble should look like:
+
+```{r echo = FALSE}
+# gather bike counts
+tidy_bikes <- untidy_bikes %>% 
+  select(-prior_to_2000) %>% 
+  gather(key = "year", value = "bike_count", x2017:x2000) %>% 
+  mutate(year = parse_number(year))
+
+# the tidied bike data
+datatable(tidy_bikes)
+
+```
+
+* Count bikes by sector.
+
+```{r echo = FALSE}
+# count bikes by sector
+tidy_bikes %>% 
+  count(sector, wt = bike_count)
+
 ```
 
 
-## 538 Flying Etiquette Survey
+* Make a plot to show the number of bikes counted across the years, facetting by sector. Has there been a steady increasing trend in bikes counted across all sectors? Which sectors have seen the most bikes counted recently?
+
+```{r echo = FALSE}
+# plot bike counts by year and sector
+ggplot(tidy_bikes, aes(x = year, y = bike_count)) +
+  geom_col() +
+  facet_wrap(~sector) 
+
+```
+
+
+### 538 Flying Etiquette Survey
+
+Follow along with these code prompts:
+
+* Use the following code to read in data used from [538](https://github.com/fivethirtyeight/data/tree/master/flying-etiquette-survey):
 
 ```{r}
-untidy_flying <- read_csv("https://raw.githubusercontent.com/fivethirtyeight/data/master/flying-etiquette-survey/flying-etiquette.csv")
-
-# Fill in code below
-rude_tidy <- flying %>% 
-    # Change characters to factors
-    mutate_if(is.character, as.factor) %>%
-    # Filter out those who have never flown on a plane
-    filter(`How often do you travel by plane?` != "Never") %>% 
-    # select columns containing "rude"
-    select(RespondentID, contains("rude")) %>%
-    # change format from wide to long
-    gather(response_var, value, -RespondentID) %>% 
-  mutate(rude = if_else(str_detect(value, "Yes"), 1, 0))
+# import flying etiquette data
+untidy_flyers <- read_csv("https://raw.githubusercontent.com/fivethirtyeight/data/master/flying-etiquette-survey/flying-etiquette.csv") %>% 
+  mutate_if(is.character, as.factor) %>%
+  # filter out those who have never flown on a plane
+  filter(`How often do you travel by plane?` != "Never")
+```
 
 
-# Make a two column dataset with variable names and number of levels
-number_of_levels <- responses_as_factors %>% 
-  summarise_all(nlevels) %>%
-  gather(variable, num_levels)
+* Select the participant ID and any question columns which include the word "rude", then `gather` all the "rude" question columns.
 
-mtcars %>%
-  top_n(2, mpg) %>%
-  pull(mpg)
+```{r echo = FALSE}
+# select then gather questions about rudeness
+tidy_rude <- untidy_flyers %>% 
+  select(RespondentID, contains("rude")) %>%
+  gather(key = "question_asked", value = "answer", -RespondentID) %>% 
+  mutate(rude_answer = if_else(str_detect(answer, "Yes"), 1, 0))
+
+```
+
+* Summarize the data: `group_by` question, then calculate the mean of your new `rude_answer` column to get the proportions of respondents who endorsed "yes it is rude" for each question.
+
+```{r echo = FALSE}
+# summarize the rude answers
+(rude_summarized <- tidy_rude %>% 
+  group_by(question_asked) %>% 
+  summarize(rude_prop = mean(rude_answer, na.rm = TRUE)))
+```
+
+
+* Make this kind of bar chart with the summarized version of your tidy data- it doesn't need to be perfect! See below for our recreation:
+
+![](https://fivethirtyeight.com/wp-content/uploads/2014/09/hickey-datalab-flying.png)
+
+For more tweaking, you can use this code to redo your labels:
+
+```{r echo = TRUE}
+abb_question <- tribble(
+  ~label,
+  "knowingly bring unruly children",
+  "wake someone up to go for a walk",
+  "recline your seat",
+  "wake someone up to go to the bathroom",
+  "bring a baby on a plane",
+  "ask to switch seats for friends",
+  "be chatty with seatmate",
+  "move to an unsold seat",
+  "ask to switch seats for family"
+)
+rude_summarized <- tidy_rude %>% 
+  group_by(question_asked) %>% 
+  summarize(rude_prop = mean(rude_answer, na.rm = TRUE)) %>% 
+  bind_cols(abb_question)
+```
+
+```{r echo = FALSE, fig.height = 5, fig.width = 8}
+# recreate 538 bar chart
+ggplot(rude_summarized, aes(x = label, y = rude_prop)) +
+  geom_col(fill = "dodgerblue", alpha = .5) +
+  coord_flip(ylim = c(0, 1)) +
+  labs(x = NULL, y = NULL) +
+  geom_text(aes(label = scales::percent(rude_prop)), hjust = -.25) +
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank())
 ```
 
 
 
-The word count data is given in these two __untidy__ and gender-specific files:
 
-  * [Female.csv](data/Female.csv)
-  * [Male.csv](data/Male.csv)
-  
-Write an R script that reads them in and writes a single tidy data frame to file. Literally, reproduce the `lotr_tidy` data frame and the `lotr_tidy.csv` data file from above.
 
-Write R code to compute the total number of words spoken by each race across the entire trilogy. Do it two ways:
-
-  * Using film-specific or gender-specific, untidy data frames as the input data.
-  * Using the `lotr_tidy` data frame as input.
-
-Reflect on the process of writing this code and on the code itself. Which is easier to write? Easier to read?
-
-Write R code to compute the total number of words spoken in each film. Do this by copying and modifying your own code for totalling words by race. Which approach is easier to modify and repurpose -- the one based on multiple, untidy data frames or the tidy data?
 
 ## Take home message
 
-It is untidy to have have data parcelled out across different files or data frames. We used `dplyr::bind_rows()` above to combine film-specific data frames into one large data frame.
+It is untidy to have data parcelled out across different files or data frames. 
 
-It is untidy to have a conceptual variable, e.g. "word count", spread across multiple variables, such as word counts for males and word counts for females. We used the `gather()` function from the tidyr package to stack up all the word counts into a single variable, create a new variable to convey male vs. female, and  do the replication needed for the other variables.
+It is untidy to have a conceptual variable, e.g. "word count", "bake count", "bike count", "rose count", spread across multiple variables, such as bike counts for each year. We used the `gather()` function from the tidyr package to stack up all these counts into a single variable, create a new variable to convey the categorical or factor variable that was previously "hidden" to us in the column names, and do the replication needed for the other variables.
 
 Many data analytic projects will benefit from a script that marshals data from different files, tidies the data, and writes a clean result to file for further analysis.
 
@@ -211,9 +308,7 @@ Watch out for how __untidy__ data seduces you into working with it more than you
 
 ### Where to next?
 
-In the next lesson [03-spread](03-spread.md) I show to untidy data, using `spread()` from the tidyr package. This might be useful at the end of an analysis, for preparing figures or tables.
-
-In the [optional bonus content](04-tidy-bonus-content.md), I show how to tidy this data using only base R functions.
+In the next lesson [03-spread](03-spread.html) I show to untidy data, using `spread()` from the tidyr package. This might be useful at the end of an analysis, for preparing figures or tables.
 
 ### Resources
 
@@ -225,3 +320,10 @@ In the [optional bonus content](04-tidy-bonus-content.md), I show how to tidy th
   * Nine simple ways to make it easier to (re)use your data by EP White, E Baldridge, ZT Brym, KJ Locey, DJ McGlinn, SR Supp. *Ideas in Ecology and Evolution* 6(2): 1–10, 2013. doi:10.4033/iee.2013.6b.6.f <http://library.queensu.ca/ojs/index.php/IEE/article/view/4608>
     - See the section "Use standard table formats"
   * Tidy data by Hadley Wickham. Journal of Statistical Software. Vol. 59, Issue 10, Sep 2014. <http://www.jstatsoft.org/v59/i10>
+  
+### Code Appendix
+
+```{r ref.label=knitr::all_labels(), echo = T, eval = F}
+```
+
+

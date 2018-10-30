@@ -2,6 +2,7 @@ name: "bakeoff-tidy"
 output_dir: '.'
 navbar:
   title: "bakeoff-tidy"
+  type: inverse
   left:
     - text: "Intro"
       href: 01-intro.html
@@ -11,7 +12,7 @@ navbar:
       href: 03-spread.html
 output:
   html_document:
-    theme: journal
+    theme: yeti
     highlight: pygments
     includes:
       after_body: footer.html
