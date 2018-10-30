@@ -16,6 +16,7 @@ This is a lesson on tidying data, remixed from [Jenny Bryan's similar lesson usi
 knitr::opts_chunk$set(error = TRUE, collapse = TRUE, comment = "#>", warning = FALSE, message = FALSE)
 library(tidyverse)
 library(DT)
+ggplot2::theme_set(ggplot2::theme_minimal())
 ```
 
 ```{r prepare-tidy-data, include = FALSE}
@@ -106,7 +107,7 @@ This data has been formatted for consumption by *human eyeballs* (paraphrasing M
 Look at the tables above and answer these questions:
 
   * What is the total number of cakes baked in signature challenges?
-  * Do pies and tarts dominate cakes any series? Does the dominant type of bake differ across the series?
+  * Do pies and tarts dominate cakes in any series? Does the dominant type of bake differ across the series?
   
 How well does your approach scale if there were many more series or if I provided you with updated data that includes all possible bakes (custards, buns, etc.)?
 

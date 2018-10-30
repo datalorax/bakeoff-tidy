@@ -15,6 +15,7 @@ This is a lesson on tidying/untidying data, remixed from [Jenny Bryan's similar 
 ```{r setup, include = FALSE, cache = FALSE}
 knitr::opts_chunk$set(error = TRUE, collapse = TRUE, comment = "#>", warning = FALSE, message = FALSE)
 library(DT)
+ggplot2::theme_set(ggplot2::theme_minimal())
 ```
 
 Enough about tidy data. How do I make it messy?
