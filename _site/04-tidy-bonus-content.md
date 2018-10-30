@@ -1,5 +1,5 @@
 Jenny Bryan
-03 October, 2016
+30 October, 2018
 
 **NOT UPDATED FOR 2016 AND THE TIDYVERSE YET!**
 
@@ -29,9 +29,19 @@ The `dplyr` package offers the function `rbind_list()` as an efficient substitut
 ``` r
 suppressPackageStartupMessages(library(dplyr))
 lotr_untidy_2 <- rbind_list(fship, ttow, rking)
-#> Warning: `rbind_list()` is deprecated. Please use `bind_rows()` instead.
-#> Warning in rbind_list__impl(environment()): Unequal factor levels: coercing
-#> to character
+#> Warning: 'rbind_list' is deprecated.
+#> Use 'bind_rows()' instead.
+#> See help("Deprecated")
+#> Warning in bind_rows_(list_or_dots(...), id = NULL): Unequal factor levels:
+#> coercing to character
+#> Warning in bind_rows_(list_or_dots(...), id = NULL): binding character and
+#> factor vector, coercing into character vector
+
+#> Warning in bind_rows_(list_or_dots(...), id = NULL): binding character and
+#> factor vector, coercing into character vector
+
+#> Warning in bind_rows_(list_or_dots(...), id = NULL): binding character and
+#> factor vector, coercing into character vector
 ```
 
 We get a warning about row-binding data frames with factors that don't have the same levels (here, the `Film` factor). The base function `rbind()` handles this by taking the union of factor levels, whereas `dplyr::rbind_list()` converts the affected factor to character.
@@ -44,7 +54,7 @@ str(lotr_untidy)
 #>  $ Female: int  1229 14 0 331 0 401 183 2 268
 #>  $ Male  : int  971 3644 1995 513 2463 3589 510 2673 2459
 str(lotr_untidy_2)
-#> 'data.frame':    9 obs. of  4 variables:
+#> Classes 'tbl_df', 'tbl' and 'data.frame':    9 obs. of  4 variables:
 #>  $ Film  : chr  "The Fellowship Of The Ring" "The Fellowship Of The Ring" "The Fellowship Of The Ring" "The Two Towers" ...
 #>  $ Race  : Factor w/ 3 levels "Elf","Hobbit",..: 1 2 3 1 2 3 1 2 3
 #>  $ Female: int  1229 14 0 331 0 401 183 2 268
@@ -132,9 +142,19 @@ The `dplyr` package offers a memory-efficient solution for row-binding a list of
 
 ``` r
 lotr_untidy_5 <- rbind_all(lotr_list)
-#> Warning: `rbind_all()` is deprecated. Please use `bind_rows()` instead.
+#> Warning: 'rbind_all' is deprecated.
+#> Use 'bind_rows()' instead.
+#> See help("Deprecated")
 #> Warning in bind_rows_(x, id = id): Unequal factor levels: coercing to
 #> character
+#> Warning in bind_rows_(x, id = id): binding character and factor vector,
+#> coercing into character vector
+
+#> Warning in bind_rows_(x, id = id): binding character and factor vector,
+#> coercing into character vector
+
+#> Warning in bind_rows_(x, id = id): binding character and factor vector,
+#> coercing into character vector
 str(lotr_untidy_5)
 #> 'data.frame':    9 obs. of  4 variables:
 #>  $ Film  : chr  "The Fellowship Of The Ring" "The Fellowship Of The Ring" "The Fellowship Of The Ring" "The Two Towers" ...
@@ -276,11 +296,6 @@ The `reshape2` package is more powerful than `tidyr` but also harder to use and 
 
 ``` r
 library(reshape2)
-#> 
-#> Attaching package: 'reshape2'
-#> The following object is masked from 'package:tidyr':
-#> 
-#>     smiths
 lotr_tidy_4 <-
   melt(lotr_untidy, measure.vars = c("Female", "Male"), value.name = 'Words')
 lotr_tidy_4

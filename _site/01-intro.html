@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+<meta name="author" content="Alison Hill &amp; Daniel Anderson" />
+
+
+<title>Introduction to Tidy Data</title>
+
+<script src="site_libs/jquery-1.12.4/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/journal.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="site_libs/datatables-binding-0.4/datatables.js"></script>
+<link href="site_libs/dt-core-1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="site_libs/dt-core-1.10.16/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="site_libs/dt-core-1.10.16/js/jquery.dataTables.min.js"></script>
+<link href="site_libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 61px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+
+.section h2 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.section h3 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.section h4 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.section h5 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.section h6 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">bakeoff-tidy</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="01-intro.html">Intro</a>
+</li>
+<li>
+  <a href="02-gather.html">Gather</a>
+</li>
+<li>
+  <a href="03-spread.html">Spread</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Introduction to Tidy Data</h1>
+<h4 class="author"><em>Alison Hill &amp; Daniel Anderson</em></h4>
+<h4 class="date"><em>30 October, 2018</em></h4>
+
+</div>
+
+
+<p>This is a lesson on tidying data, remixed from <a href="https://github.com/jennybc/lotr-tidy">Jenny Bryan’s similar lesson using “Lord of the Rings” data</a>. Most text + code is Jenny’s, basically we plopped a new dataset in there 😉</p>
+<hr />
+<blockquote class="twitter-tweet" lang="en">
+<p>
+If I had one thing to tell biologists learning bioinformatics, it would be “write code for humans, write data for computers”.
+</p>
+— Vince Buffalo (<span class="citation">@vsbuffalo</span>) <a href="https://twitter.com/vsbuffalo/statuses/358699162679787521">July 20, 2013</a>
+</blockquote>
+<p>An important aspect of “writing data for computers” is to make your data <strong>tidy</strong>. Key features of <strong>tidy</strong> data:</p>
+<ul>
+<li>Each column is a variable</li>
+<li>Each row is an observation</li>
+</ul>
+<p>If you are struggling to make a figure, for example, stop and think hard about whether your data is <strong>tidy</strong>. Untidiness is a common, often overlooked cause of agony in data analysis and visualization.</p>
+<div id="gbbo-example" class="section level2 tabset">
+<h2>GBBO example</h2>
+<p>We will give you a concrete example of some untidy data from <a href="https://github.com/apreshill/bakeoff">“The Great British Bake Off”</a>.</p>
+<div id="series-1" class="section level3">
+<h3>Series 1</h3>
+<table>
+<caption>Series 1</caption>
+<thead>
+<tr class="header">
+<th align="left">challenge</th>
+<th align="right">cake</th>
+<th align="right">pie_tart</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">showstopper</td>
+<td align="right">5</td>
+<td align="right">5</td>
+</tr>
+<tr class="even">
+<td align="left">signature</td>
+<td align="right">12</td>
+<td align="right">4</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="series-2" class="section level3">
+<h3>Series 2</h3>
+<table>
+<caption>Series 2</caption>
+<thead>
+<tr class="header">
+<th align="left">challenge</th>
+<th align="right">cake</th>
+<th align="right">pie_tart</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">showstopper</td>
+<td align="right">8</td>
+<td align="right">17</td>
+</tr>
+<tr class="even">
+<td align="left">signature</td>
+<td align="right">21</td>
+<td align="right">7</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="series-3" class="section level3">
+<h3>Series 3</h3>
+<table>
+<caption>Series 3</caption>
+<thead>
+<tr class="header">
+<th align="left">challenge</th>
+<th align="right">cake</th>
+<th align="right">pie_tart</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">showstopper</td>
+<td align="right">12</td>
+<td align="right">17</td>
+</tr>
+<tr class="even">
+<td align="left">signature</td>
+<td align="right">24</td>
+<td align="right">12</td>
+</tr>
+</tbody>
+</table>
+<p>We have one table per series. In each table, we have the total number of bakes, by challenge and type (cake versus pie/tart).</p>
+<p>You could imagine finding these separate tables as separate worksheets in an Excel workbook. Or hanging out in some cells on the side of a worksheet that contains the underlying data raw data. Or as tables on a webpage or in a Word document.</p>
+<p>This data has been formatted for consumption by <em>human eyeballs</em> (paraphrasing Murrell; see Resources). The format makes it easy for a <em>human</em> to look up the number of showstopper cakes baked in Series 2. But this format actually makes it pretty hard for a <em>computer</em> to pull out such counts and, more importantly, to compute on them or graph them.</p>
+</div>
+</div>
+<div id="exercises" class="section level2">
+<h2>Exercises</h2>
+<p>Look at the tables above and answer these questions:</p>
+<ul>
+<li>What is the total number of cakes baked in signature challenges?</li>
+<li>Do pies and tarts dominate cakes any series? Does the dominant type of bake differ across the series?</li>
+</ul>
+<p>How well does your approach scale if there were many more series or if I provided you with updated data that includes all possible bakes (custards, buns, etc.)?</p>
+</div>
+<div id="tidy-bake-off-data" class="section level2">
+<h2>Tidy Bake Off data</h2>
+<p>Here’s how the same data looks in tidy form:</p>
+<div id="htmlwidget-a542dfd7e252ef314f37" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-a542dfd7e252ef314f37">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"],["1","1","1","1","2","2","2","2","3","3","3","3","4","4","4","4","5","5","5","5","6","6","6","7","7","7","7","8","8","8","8"],["showstopper","showstopper","signature","signature","showstopper","showstopper","signature","signature","showstopper","showstopper","signature","signature","showstopper","showstopper","signature","signature","showstopper","showstopper","signature","signature","showstopper","signature","signature","showstopper","showstopper","signature","signature","showstopper","showstopper","signature","signature"],["cake","pie_tart","cake","pie_tart","cake","pie_tart","cake","pie_tart","cake","pie_tart","cake","pie_tart","cake","pie_tart","cake","pie_tart","cake","pie_tart","cake","pie_tart","cake","cake","pie_tart","cake","pie_tart","cake","pie_tart","cake","pie_tart","cake","pie_tart"],[5,5,12,4,8,17,21,7,12,17,24,12,27,9,11,15,20,6,4,7,12,20,17,19,3,11,10,26,12,21,8]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>series<\/th>\n      <th>challenge<\/th>\n      <th>cake<\/th>\n      <th>bakes<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":4},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<p>Notice that tidy data is generally taller and narrower. It doesn’t fit nicely on the page. Certain elements get repeated alot, e.g. <code>showstopper</code>. For these reasons, we often instinctively resist <strong>tidy</strong> data as inefficient or ugly. But, unless and until you’re making the final product for a textual presentation of data, ignore your yearning to see the data in a compact form.</p>
+</div>
+<div id="benefits-of-tidy-data" class="section level2">
+<h2>Benefits of tidy data</h2>
+<p>With the data in tidy form, it’s natural to <em>get a computer</em> to do further summarization or to make a figure. This assumes you’re using language that is “data-aware”, which R certainly is. Let’s answer the questions posed above.</p>
+<div id="whats-the-total-number-of-cakes-baked-in-signature-challenges" class="section level4">
+<h4>What’s the total number of cakes baked in signature challenges?</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bakes_tidy <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st"> </span><span class="kw">count</span>(challenge, cake, <span class="dt">wt =</span> bakes, <span class="dt">sort =</span> <span class="ot">TRUE</span>)
+<span class="co">#&gt; # A tibble: 4 x 3</span>
+<span class="co">#&gt;   challenge   cake         n</span>
+<span class="co">#&gt;   &lt;chr&gt;       &lt;chr&gt;    &lt;int&gt;</span>
+<span class="co">#&gt; 1 showstopper cake       129</span>
+<span class="co">#&gt; 2 signature   cake       124</span>
+<span class="co">#&gt; 3 signature   pie_tart    80</span>
+<span class="co">#&gt; 4 showstopper pie_tart    69</span>
+## outside the tidyverse:
+<span class="co">#aggregate(Words ~ Gender, data = lotr_tidy, FUN = sum)</span></code></pre></div>
+<p>Now it takes a small bit of code to compute the total number of cakes for each challenge across all series. The total number of cakes baked in signature challenges is 124. It was important here to have all bake counts in a single variable, within a data frame that also included variables for challenge and type of bake.</p>
+</div>
+<div id="do-pies-and-tarts-dominate-any-series-does-the-dominant-type-of-bake-differ-across-the-series" class="section level4">
+<h4>Do pies and tarts dominate any series? Does the dominant type of bake differ across the series?</h4>
+<p>First, we sum across challenges, to obtain bake counts for the different series across episodes/challenges.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(bakes_by_series &lt;-<span class="st"> </span>bakes_tidy <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">   </span><span class="kw">count</span>(series, cake, <span class="dt">wt =</span> bakes))
+<span class="co">#&gt; # A tibble: 16 x 3</span>
+<span class="co">#&gt;    series cake         n</span>
+<span class="co">#&gt;    &lt;fct&gt;  &lt;chr&gt;    &lt;int&gt;</span>
+<span class="co">#&gt;  1 1      cake        17</span>
+<span class="co">#&gt;  2 1      pie_tart     9</span>
+<span class="co">#&gt;  3 2      cake        29</span>
+<span class="co">#&gt;  4 2      pie_tart    24</span>
+<span class="co">#&gt;  5 3      cake        36</span>
+<span class="co">#&gt;  6 3      pie_tart    29</span>
+<span class="co">#&gt;  7 4      cake        38</span>
+<span class="co">#&gt;  8 4      pie_tart    24</span>
+<span class="co">#&gt;  9 5      cake        24</span>
+<span class="co">#&gt; 10 5      pie_tart    13</span>
+<span class="co">#&gt; 11 6      cake        32</span>
+<span class="co">#&gt; 12 6      pie_tart    17</span>
+<span class="co">#&gt; 13 7      cake        30</span>
+<span class="co">#&gt; 14 7      pie_tart    13</span>
+<span class="co">#&gt; 15 8      cake        47</span>
+<span class="co">#&gt; 16 8      pie_tart    20</span>
+## outside the tidyverse:
+<span class="co">#(by_race_film &lt;- aggregate(Words ~ Race * Film, data = lotr_tidy, FUN = sum))</span></code></pre></div>
+<p>We can stare hard at those numbers to answer the question. But even nicer is to depict the bake counts we just computed in a barchart.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(bakes_by_series, <span class="kw">aes</span>(<span class="dt">x =</span> series, <span class="dt">y =</span> n, <span class="dt">fill =</span> cake)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_flip</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">guides</span>(<span class="dt">fill =</span> <span class="kw">guide_legend</span>(<span class="dt">reverse =</span> <span class="ot">TRUE</span>))</code></pre></div>
+<p><img src="01-intro_files/figure-html/barchart-bakes-1.png" width="672" /></p>
+<p>Or we can make a line chart…</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(bakes_by_series, <span class="kw">aes</span>(<span class="dt">x =</span> series, <span class="dt">y =</span> n, 
+                            <span class="dt">color =</span> cake,
+                            <span class="dt">group =</span> cake)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">expand_limits</span>(<span class="dt">y =</span> <span class="dv">0</span>)</code></pre></div>
+<p><img src="01-intro_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>So cakes are king, at least relative to pies/tarts across all series. Pies/tarts saw a spike in popularity around series 3. Cakes really surged in the last series, series 8.</p>
+<p>One thing missing from this data is information about total number of participants/bakes across each series, so that we can calculate proportions.</p>
+<p>Again, it was important to have all the data in a single data frame, all bake counts in a single variable, and associated variables for challenge and type of bake.</p>
+</div>
+</div>
+<div id="take-home-message" class="section level2">
+<h2>Take home message</h2>
+<p>Having the data in <strong>tidy</strong> form was a key enabler for our data aggregations and visualization.</p>
+<p>Tidy data is integral to efficient data analysis and visualization.</p>
+<p>If you’re skeptical about any of the above claims, it would be interesting to get the requested word counts, the barchart, or the insight gained from the chart <em>without</em> tidying or plotting the data. And imagine redoing all of that on the full dataset, which includes 3 more Races, e.g. Dwarves.</p>
+<div id="where-to-next" class="section level3">
+<h3>Where to next?</h3>
+<p>In <a href="02-gather.md">the next lesson</a>, we’ll show how to tidy this data.</p>
+<p>Our summing over gender to get word counts for combinations of film and race is an example of <strong>data aggregation</strong>. It’s a frequent companion task with tidying and reshaping. Learn more at:</p>
+<ul>
+<li>Simple aggregation with the tidyverse: <code>dplyr::count()</code> and <code>dplyr::group_by()</code> + <code>dplyr::summarize()</code>, <a href="http://stat545.com/block010_dplyr-end-single-table.html#group_by-is-a-mighty-weapon">STAT 545 coverage</a>, <a href="http://r4ds.had.co.nz/transform.html">Data transformation</a> chapter in R for Data Science.</li>
+<li>General aggregation with the tidyverse: <a href="http://stat545.com/block024_group-nest-split-map.html">STAT 545 coverage</a> of general Split-Apply-Combine via nested data frames.</li>
+<li>Simple aggregation with base R: <code>aggregate()</code>.</li>
+<li>General aggregation with base R: <code>tapply()</code>, <code>split()</code>, <code>by()</code>, etc.</li>
+</ul>
+<p>These figures were made with <code>ggplot2</code>, a popular package that implements the Grammar of Graphics in R.</p>
+</div>
+<div id="resources" class="section level3">
+<h3>Resources</h3>
+<ul>
+<li><a href="http://r4ds.had.co.nz/tidy-data.html">Tidy data</a> chapter in R for Data Science, by Garrett Grolemund and Hadley Wickham
+<ul>
+<li><a href="https://github.com/hadley/tidyr">tidyr</a> R package</li>
+<li>The tidyverse meta-package, within which <code>tidyr</code> lives: <a href="https://github.com/hadley/tidyverse">tidyverse</a>.</li>
+</ul></li>
+<li><a href="http://shop.oreilly.com/product/0636920024422.do">Bad Data Handbook</a> by By Q. Ethan McCallum, published by O’Reilly.
+<ul>
+<li>Chapter 3: Data Intended for Human Consumption, Not Machine Consumption by Paul Murrell.</li>
+</ul></li>
+<li>Nine simple ways to make it easier to (re)use your data by EP White, E Baldridge, ZT Brym, KJ Locey, DJ McGlinn, SR Supp. <em>Ideas in Ecology and Evolution</em> 6(2): 1–10, 2013. <a href="doi:10.4033/iee.2013.6b.6.f" class="uri">doi:10.4033/iee.2013.6b.6.f</a> <a href="http://library.queensu.ca/ojs/index.php/IEE/article/view/4608" class="uri">http://library.queensu.ca/ojs/index.php/IEE/article/view/4608</a>
+<ul>
+<li>See the section “Use standard table formats”</li>
+</ul></li>
+<li>Tidy data by Hadley Wickham. Journal of Statistical Software. Vol. 59, Issue 10, Sep 2014. <a href="http://www.jstatsoft.org/v59/i10" class="uri">http://www.jstatsoft.org/v59/i10</a></li>
+</ul>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -4,8 +4,8 @@ author: "Alison Hill & Daniel Anderson"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
   html_document:
-    theme: flatly
-    highlight: pygments
+    toc: TRUE
+    toc_float: TRUE
 ---
 
 This is a lesson on tidying data, remixed from [Jenny Bryan's similar lesson using "Lord of the Rings" data](https://github.com/jennybc/lotr-tidy). Most text + code is Jenny's, basically we plopped a new dataset in there `r emo::ji("wink")`

@@ -4,8 +4,6 @@ author: "Alison Hill & Daniel Anderson"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
   html_document:
-    theme: flatly
-    highlight: pygments
     toc: TRUE
     toc_float: TRUE
 ---

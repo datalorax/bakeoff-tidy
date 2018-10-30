@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+<meta name="author" content="Alison Hill &amp; Daniel Anderson" />
+
+
+<title>Gather to Tidy Data</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/journal.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 61px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+
+.section h2 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.section h3 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.section h4 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.section h5 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.section h6 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">bakeoff-tidy</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="01-intro.html">Intro</a>
+</li>
+<li>
+  <a href="02-gather.html">Gather</a>
+</li>
+<li>
+  <a href="03-spread.html">Spread</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Gather to Tidy Data</h1>
+<h4 class="author"><em>Alison Hill &amp; Daniel Anderson</em></h4>
+<h4 class="date"><em>30 October, 2018</em></h4>
+
+</div>
+
+
+<p>This is a lesson on tidying data, remixed from <a href="https://github.com/jennybc/lotr-tidy">Jenny Bryan’s similar lesson using “Lord of the Rings” data</a>. Most text + code is Jenny’s, basically we plopped a new dataset in there 😉</p>
+<hr />
+<p>An important aspect of “writing data for computers” is to make your data <strong>tidy</strong>. Key features of <strong>tidy</strong> data:</p>
+<ul>
+<li>Each column is a variable</li>
+<li>Each row is an observation</li>
+</ul>
+<p>But unfortunately, <strong>untidy</strong> data abounds. In fact, we often inflict it on ourselves, because untidy formats are more attractive for data entry or examination. So how do you make <strong>untidy</strong> data <strong>tidy</strong>?</p>
+<div id="import" class="section level2">
+<h2>Import</h2>
+<p>We now import the untidy data from the eight series that was presented in <a href="01-intro.md">the intro</a>.</p>
+<p>I assume that data can be found as eight plain text, delimited files, one for each film, each with the filename <code>series*.csv</code>. How to liberate data from spreadsheets or tables in word processing documents is beyond the scope of this tutorial.</p>
+<p>The files live here in this repo, which you could clone as a new RStudio Project. We’ll use a neat trick to read in all 8 csv files at once:</p>
+<blockquote class="twitter-tweet" data-lang="en">
+<p lang="en" dir="ltr">
+☝️ My first <a href="https://twitter.com/hashtag/rstats?src=hash&amp;ref_src=twsrc%5Etfw">#rstats</a> tip: use purrr::map_df() to read all .csv files in a 📂 and stick them in a single data frame:<br><br>f &lt;- list.files(<br> “my_folder”,<br> pattern = “*.csv“,<br> full.names = TRUE)<br><br>d &lt;- purrr::map_df(f, readr::read_csv, .id =”id“) <a href="https://t.co/JWxI5ecr0k">pic.twitter.com/JWxI5ecr0k</a>
+</p>
+— We are R-Ladies (<span class="citation">@WeAreRLadies</span>) <a href="https://twitter.com/WeAreRLadies/status/1034817323922804737?ref_src=twsrc%5Etfw">August 29, 2018</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<p>You do not need to know how the below code works- please treat it like a magic black box for now! You’ll learn more about these packages and functions in the third course of this series.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+bakes_untidy &lt;-<span class="st"> </span>fs<span class="op">::</span><span class="kw">dir_ls</span>(<span class="dt">path =</span> here<span class="op">::</span><span class="kw">here</span>(<span class="st">&quot;data&quot;</span>), 
+                          <span class="dt">regexp =</span> <span class="st">&quot;series</span><span class="ch">\\</span><span class="st">d.csv&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>purrr<span class="op">::</span><span class="kw">map_df</span>(readr<span class="op">::</span>read_csv)</code></pre></div>
+<p>We now have one data frame with bake counts for all 8 series, across both the signature and showstopper challenges.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bakes_untidy
+<span class="co">#&gt; # A tibble: 16 x 4</span>
+<span class="co">#&gt;    series challenge    cake pie_tart</span>
+<span class="co">#&gt;     &lt;int&gt; &lt;chr&gt;       &lt;int&gt;    &lt;int&gt;</span>
+<span class="co">#&gt;  1      1 showstopper     5        5</span>
+<span class="co">#&gt;  2      1 signature      12        4</span>
+<span class="co">#&gt;  3      2 showstopper     8       17</span>
+<span class="co">#&gt;  4      2 signature      21        7</span>
+<span class="co">#&gt;  5      3 showstopper    12       17</span>
+<span class="co">#&gt;  6      3 signature      24       12</span>
+<span class="co">#&gt;  7      4 showstopper    27        9</span>
+<span class="co">#&gt;  8      4 signature      11       15</span>
+<span class="co">#&gt;  9      5 showstopper    20        6</span>
+<span class="co">#&gt; 10      5 signature       4        7</span>
+<span class="co">#&gt; 11      6 showstopper    12        0</span>
+<span class="co">#&gt; 12      6 signature      20       17</span>
+<span class="co">#&gt; 13      7 showstopper    19        3</span>
+<span class="co">#&gt; 14      7 signature      11       10</span>
+<span class="co">#&gt; 15      8 showstopper    26       12</span>
+<span class="co">#&gt; 16      8 signature      21        8</span>
+<span class="kw">glimpse</span>(bakes_untidy)
+<span class="co">#&gt; Observations: 16</span>
+<span class="co">#&gt; Variables: 4</span>
+<span class="co">#&gt; $ series    &lt;int&gt; 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8</span>
+<span class="co">#&gt; $ challenge &lt;chr&gt; &quot;showstopper&quot;, &quot;signature&quot;, &quot;showstopper&quot;, &quot;signatur...</span>
+<span class="co">#&gt; $ cake      &lt;int&gt; 5, 12, 8, 21, 12, 24, 27, 11, 20, 4, 12, 20, 19, 11,...</span>
+<span class="co">#&gt; $ pie_tart  &lt;int&gt; 5, 4, 17, 7, 17, 12, 9, 15, 6, 7, 0, 17, 3, 10, 12, 8</span></code></pre></div>
+<p>Assembling one large data object from lots of little ones is common data preparation task. When the pieces are as similar as they here, it’s nice to assemble them into one object right away. In other scenarios, you may need to do some remedial work on the pieces before they can be fitted together nicely.</p>
+<p>A good guiding principle is to glue the pieces together as early as possible, because it’s easier and more efficient to tidy a single object than 20 or 1000.</p>
+</div>
+<div id="tidy" class="section level2">
+<h2>Tidy</h2>
+<p>We are still violating one of the fundamental principles of <strong>tidy data</strong>. “Bake count” is a fundamental variable in our dataset and it’s currently spread out over two variables, <code>cake</code> and <code>pie_tart</code>. Conceptually, we need to gather up the bake counts into a single variable and create a new variable, <code>n_bakes</code>, to track whether each count refers to cakes or pies/tarts. We use the <code>gather()</code> function from the tidyr package to do this.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bakes_tidy &lt;-
+<span class="st">  </span><span class="kw">gather</span>(bakes_untidy, <span class="dt">key =</span> <span class="st">&#39;type_bake&#39;</span>, <span class="dt">value =</span> <span class="st">&#39;n_bakes&#39;</span>, cake, pie_tart)
+bakes_tidy
+<span class="co">#&gt; # A tibble: 32 x 4</span>
+<span class="co">#&gt;    series challenge   type_bake n_bakes</span>
+<span class="co">#&gt;     &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;       &lt;int&gt;</span>
+<span class="co">#&gt;  1      1 showstopper cake            5</span>
+<span class="co">#&gt;  2      1 signature   cake           12</span>
+<span class="co">#&gt;  3      2 showstopper cake            8</span>
+<span class="co">#&gt;  4      2 signature   cake           21</span>
+<span class="co">#&gt;  5      3 showstopper cake           12</span>
+<span class="co">#&gt;  6      3 signature   cake           24</span>
+<span class="co">#&gt;  7      4 showstopper cake           27</span>
+<span class="co">#&gt;  8      4 signature   cake           11</span>
+<span class="co">#&gt;  9      5 showstopper cake           20</span>
+<span class="co">#&gt; 10      5 signature   cake            4</span>
+<span class="co">#&gt; # ... with 22 more rows</span></code></pre></div>
+<p>Tidy data … mission accomplished!</p>
+<p>To explain our call to <code>gather()</code> above, let’s read it from right to left: we took the variables <code>cake</code> and <code>pie_tart</code> and gathered their <em>values</em> into a single new variable <code>n_bakes</code>. This forced the creation of a companion variable <code>type_bake</code>, a <em>key</em>, which tells whether a specific value of <code>n_bakes</code> came from <code>cake</code> or <code>pie_tart</code>. All other variables, such as <code>challenge</code>, remain unchanged and are simply replicated as needed. The documentation for <code>gather()</code> gives more examples and documents additional arguments.</p>
+</div>
+<div id="export" class="section level2">
+<h2>Export</h2>
+<p>Now we write this multi-series, tidy dataset to file for use in various downstream scripts for further analysis and visualization. This would make an excellent file to share on the web with others, providing a tool-agnostic, ready-to-analyze entry point for anyone wishing to play with this data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">write_csv</span>(bakes_tidy, <span class="dt">path =</span> <span class="kw">file.path</span>(<span class="st">&quot;data&quot;</span>, <span class="st">&quot;bakes_tidy.csv&quot;</span>)) </code></pre></div>
+<p>You can inspect this delimited file here: <a href="data/bakes_tidy.csv">bakes_tidy.csv</a>.</p>
+</div>
+<div id="exercises" class="section level2">
+<h2>Exercises</h2>
+<p>Choose one of three tidying adventures:</p>
+<div id="bachelorette" class="section level3">
+<h3><code>Bachelorette</code></h3>
+<p>Follow along with these code prompts:</p>
+<ul>
+<li>Use the following code to read in data used from several stories from <a href="https://github.com/fivethirtyeight/data/tree/master/bachelorette">538</a> (Note: you’ll get a bunch of parsing errors and that is OK to ignore):</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bach &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/fivethirtyeight/data/master/bachelorette/bachelorette.csv&quot;</span>,
+                         <span class="dt">col_types =</span> <span class="kw">cols</span>(<span class="dt">SEASON =</span> <span class="kw">col_integer</span>()))</code></pre></div>
+<ul>
+<li>Create a dataset that looks like this:</li>
+</ul>
+<pre><code>#&gt; # A tibble: 1,232 x 5
+#&gt;    SHOW         SEASON CONTESTANT     week eliminated
+#&gt;    &lt;chr&gt;         &lt;int&gt; &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;     
+#&gt;  1 Bachelorette     13 13_BRYAN_A        1 R1        
+#&gt;  2 Bachelorette     13 13_BLAKE_K        1 E         
+#&gt;  3 Bachelorette     13 13_GRANT_H        1 E         
+#&gt;  4 Bachelorette     13 13_JEDIDIAH_B     1 E         
+#&gt;  5 Bachelorette     13 13_KYLE_S         1 E         
+#&gt;  6 Bachelorette     13 13_MICHAEL_B      1 E         
+#&gt;  7 Bachelorette     13 13_MILTON_L       1 E         
+#&gt;  8 Bachelorette     13 13_MOHIT_S        1 E         
+#&gt;  9 Bachelorette     13 13_ROB_H          1 E         
+#&gt; 10 Bachelorette     12 12_JORDAN_R       1 R1        
+#&gt; # ... with 1,222 more rows</code></pre>
+<p>Use this code template if you want some help getting there:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">b_tidy &lt;-<span class="st"> </span>bach <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span>SEASON <span class="op">==</span><span class="st"> &quot;SEASON&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(SHOW, SEASON, CONTESTANT, <span class="kw">starts_with</span>(<span class="st">&quot;ELIMINATION&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">gather</span>(<span class="dt">key =</span> <span class="op">&lt;</span>what is the key var you want?<span class="op">&gt;</span>, 
+         <span class="dt">value =</span> <span class="op">&lt;</span>what is the value var you want?<span class="op">&gt;</span>, 
+         <span class="op">&lt;</span>select which vars you want to gather?<span class="op">&gt;</span>, 
+         <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">week =</span> <span class="kw">str_replace</span>(week, <span class="st">&quot;-&quot;</span>, <span class="st">&quot;_&quot;</span>),
+         <span class="dt">week =</span> <span class="kw">parse_number</span>(week))
+b_tidy</code></pre></div>
+<ul>
+<li>Use the tidy dataset to answer the following questions:</li>
+</ul>
+<ol style="list-style-type: decimal">
+<li>How many contestants were eliminated in week 3? What about for the Bachelor vs. the Bachelorette?</li>
+<li>Make a plot of the number of roses, facetted by show.</li>
+</ol>
+<p><img src="02-gather_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+</div>
+<div id="pdx-bike-counts" class="section level3">
+<h3>PDX Bike Counts</h3>
+<p>update this link once up on github</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">untidy_bikes &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/apreshill/bakeoff-tidy/master/data/untidy-bike-counts.csv&quot;</span>)</code></pre></div>
+</div>
+</div>
+<div id="flying-etiquette-survey" class="section level2">
+<h2>538 Flying Etiquette Survey</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">untidy_flying &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/fivethirtyeight/data/master/flying-etiquette-survey/flying-etiquette.csv&quot;</span>)
+
+<span class="co"># Fill in code below</span>
+rude_tidy &lt;-<span class="st"> </span>flying <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="co"># Change characters to factors</span>
+<span class="st">    </span><span class="kw">mutate_if</span>(is.character, as.factor) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="co"># Filter out those who have never flown on a plane</span>
+<span class="st">    </span><span class="kw">filter</span>(<span class="st">`</span><span class="dt">How often do you travel by plane?</span><span class="st">`</span> <span class="op">!=</span><span class="st"> &quot;Never&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="co"># select columns containing &quot;rude&quot;</span>
+<span class="st">    </span><span class="kw">select</span>(RespondentID, <span class="kw">contains</span>(<span class="st">&quot;rude&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="co"># change format from wide to long</span>
+<span class="st">    </span><span class="kw">gather</span>(response_var, value, <span class="op">-</span>RespondentID) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">rude =</span> <span class="kw">if_else</span>(<span class="kw">str_detect</span>(value, <span class="st">&quot;Yes&quot;</span>), <span class="dv">1</span>, <span class="dv">0</span>))
+<span class="co">#&gt; Error in eval(lhs, parent, parent): object &#39;flying&#39; not found</span>
+
+
+<span class="co"># Make a two column dataset with variable names and number of levels</span>
+number_of_levels &lt;-<span class="st"> </span>responses_as_factors <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise_all</span>(nlevels) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">gather</span>(variable, num_levels)
+<span class="co">#&gt; Error in eval(lhs, parent, parent): object &#39;responses_as_factors&#39; not found</span>
+
+mtcars <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">top_n</span>(<span class="dv">2</span>, mpg) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pull</span>(mpg)
+<span class="co">#&gt; [1] 32.4 33.9</span></code></pre></div>
+<p>The word count data is given in these two <strong>untidy</strong> and gender-specific files:</p>
+<ul>
+<li><a href="data/Female.csv">Female.csv</a></li>
+<li><a href="data/Male.csv">Male.csv</a></li>
+</ul>
+<p>Write an R script that reads them in and writes a single tidy data frame to file. Literally, reproduce the <code>lotr_tidy</code> data frame and the <code>lotr_tidy.csv</code> data file from above.</p>
+<p>Write R code to compute the total number of words spoken by each race across the entire trilogy. Do it two ways:</p>
+<ul>
+<li>Using film-specific or gender-specific, untidy data frames as the input data.</li>
+<li>Using the <code>lotr_tidy</code> data frame as input.</li>
+</ul>
+<p>Reflect on the process of writing this code and on the code itself. Which is easier to write? Easier to read?</p>
+<p>Write R code to compute the total number of words spoken in each film. Do this by copying and modifying your own code for totalling words by race. Which approach is easier to modify and repurpose – the one based on multiple, untidy data frames or the tidy data?</p>
+</div>
+<div id="take-home-message" class="section level2">
+<h2>Take home message</h2>
+<p>It is untidy to have have data parcelled out across different files or data frames. We used <code>dplyr::bind_rows()</code> above to combine film-specific data frames into one large data frame.</p>
+<p>It is untidy to have a conceptual variable, e.g. “word count”, spread across multiple variables, such as word counts for males and word counts for females. We used the <code>gather()</code> function from the tidyr package to stack up all the word counts into a single variable, create a new variable to convey male vs. female, and do the replication needed for the other variables.</p>
+<p>Many data analytic projects will benefit from a script that marshals data from different files, tidies the data, and writes a clean result to file for further analysis.</p>
+<p>Watch out for how <strong>untidy</strong> data seduces you into working with it more than you should:</p>
+<ul>
+<li>Data optimized for consumption by human eyeballs <em>is</em> attractive, so it’s hard to remember it’s suboptimal for computation. How can something that looks so pretty be so wrong?</li>
+<li>Tidy data often has lots of repetition, which triggers hand-wringing about efficiency and aesthetics. Until you can document a performance problem, keep calm and tidy on.</li>
+<li>Tidying operations are unfamiliar to many of us and we avoid them, subconsciously preferring to faff around with other workarounds that are more familiar.</li>
+</ul>
+<div id="where-to-next" class="section level3">
+<h3>Where to next?</h3>
+<p>In the next lesson <a href="03-spread.md">03-spread</a> I show to untidy data, using <code>spread()</code> from the tidyr package. This might be useful at the end of an analysis, for preparing figures or tables.</p>
+<p>In the <a href="04-tidy-bonus-content.md">optional bonus content</a>, I show how to tidy this data using only base R functions.</p>
+</div>
+<div id="resources" class="section level3">
+<h3>Resources</h3>
+<ul>
+<li><a href="http://r4ds.had.co.nz/tidy-data.html">Tidy data</a> chapter in R for Data Science, by Garrett Grolemund and Hadley Wickham
+<ul>
+<li><a href="https://github.com/hadley/tidyr">tidyr</a> R package</li>
+<li>The tidyverse meta-package, within which <code>tidyr</code> lives: <a href="https://github.com/hadley/tidyversee">tidyverse</a>.</li>
+</ul></li>
+<li><a href="http://shop.oreilly.com/product/0636920024422.do">Bad Data Handbook</a> by By Q. Ethan McCallum, published by O’Reilly.
+<ul>
+<li>Chapter 3: Data Intended for Human Consumption, Not Machine Consumption by Paul Murrell.</li>
+</ul></li>
+<li>Nine simple ways to make it easier to (re)use your data by EP White, E Baldridge, ZT Brym, KJ Locey, DJ McGlinn, SR Supp. <em>Ideas in Ecology and Evolution</em> 6(2): 1–10, 2013. <a href="doi:10.4033/iee.2013.6b.6.f" class="uri">doi:10.4033/iee.2013.6b.6.f</a> <a href="http://library.queensu.ca/ojs/index.php/IEE/article/view/4608" class="uri">http://library.queensu.ca/ojs/index.php/IEE/article/view/4608</a>
+<ul>
+<li>See the section “Use standard table formats”</li>
+</ul></li>
+<li>Tidy data by Hadley Wickham. Journal of Statistical Software. Vol. 59, Issue 10, Sep 2014. <a href="http://www.jstatsoft.org/v59/i10" class="uri">http://www.jstatsoft.org/v59/i10</a></li>
+</ul>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

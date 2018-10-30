@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="data:text/css;charset=utf-8,%0A%40font%2Dface%20%7B%0Afont%2Dfamily%3A%20octicons%2Dlink%3B%0Asrc%3A%20url%28data%3Afont%2Fwoff%3Bcharset%3Dutf%2D8%3Bbase64%2Cd09GRgABAAAAAAZwABAAAAAACFQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABEU0lHAAAGaAAAAAgAAAAIAAAAAUdTVUIAAAZcAAAACgAAAAoAAQAAT1MvMgAAAyQAAABJAAAAYFYEU3RjbWFwAAADcAAAAEUAAACAAJThvmN2dCAAAATkAAAABAAAAAQAAAAAZnBnbQAAA7gAAACyAAABCUM%2B8IhnYXNwAAAGTAAAABAAAAAQABoAI2dseWYAAAFsAAABPAAAAZwcEq9taGVhZAAAAsgAAAA0AAAANgh4a91oaGVhAAADCAAAABoAAAAkCA8DRGhtdHgAAAL8AAAADAAAAAwGAACfbG9jYQAAAsAAAAAIAAAACABiATBtYXhwAAACqAAAABgAAAAgAA8ASm5hbWUAAAToAAABQgAAAlXu73sOcG9zdAAABiwAAAAeAAAAME3QpOBwcmVwAAAEbAAAAHYAAAB%2FaFGpk3jaTY6xa8JAGMW%2FO62BDi0tJLYQincXEypYIiGJjSgHniQ6umTsUEyLm5BV6NDBP8Tpts6F0v%2Bk%2F0an2i%2BitHDw3v2%2B9%2BDBKTzsJNnWJNTgHEy4BgG3EMI9DCEDOGEXzDADU5hBKMIgNPZqoD3SilVaXZCER3%2FI7AtxEJLtzzuZfI%2BVVkprxTlXShWKb3TBecG11rwoNlmmn1P2WYcJczl32etSpKnziC7lQyWe1smVPy%2FLt7Kc%2B0vWY%2FgAgIIEqAN9we0pwKXreiMasxvabDQMM4riO%2BqxM2ogwDGOZTXxwxDiycQIcoYFBLj5K3EIaSctAq2kTYiw%2Bymhce7vwM9jSqO8JyVd5RH9gyTt2%2BJ%2FyUmYlIR0s04n6%2B7Vm1ozezUeLEaUjhaDSuXHwVRgvLJn1tQ7xiuVv%2FocTRF42mNgZGBgYGbwZOBiAAFGJBIMAAizAFoAAABiAGIAznjaY2BkYGAA4in8zwXi%2BW2%2BMjCzMIDApSwvXzC97Z4Ig8N%2FBxYGZgcgl52BCSQKAA3jCV8CAABfAAAAAAQAAEB42mNgZGBg4f3vACQZQABIMjKgAmYAKEgBXgAAeNpjYGY6wTiBgZWBg2kmUxoDA4MPhGZMYzBi1AHygVLYQUCaawqDA4PChxhmh%2F8ODDEsvAwHgMKMIDnGL0x7gJQCAwMAJd4MFwAAAHjaY2BgYGaA4DAGRgYQkAHyGMF8NgYrIM3JIAGVYYDT%2BAEjAwuDFpBmA9KMDEwMCh9i%2Fv8H8sH0%2F4dQc1iAmAkALaUKLgAAAHjaTY9LDsIgEIbtgqHUPpDi3gPoBVyRTmTddOmqTXThEXqrob2gQ1FjwpDvfwCBdmdXC5AVKFu3e5MfNFJ29KTQT48Ob9%2FlqYwOGZxeUelN2U2R6%2BcArgtCJpauW7UQBqnFkUsjAY%2FkOU1cP%2BDAgvxwn1chZDwUbd6CFimGXwzwF6tPbFIcjEl%2BvvmM%2FbyA48e6tWrKArm4ZJlCbdsrxksL1AwWn%2FyBSJKpYbq8AXaaTb8AAHja28jAwOC00ZrBeQNDQOWO%2F%2FsdBBgYGRiYWYAEELEwMTE4uzo5Zzo5b2BxdnFOcALxNjA6b2ByTswC8jYwg0VlNuoCTWAMqNzMzsoK1rEhNqByEyerg5PMJlYuVueETKcd%2F89uBpnpvIEVomeHLoMsAAe1Id4AAAAAAAB42oWQT07CQBTGv0JBhagk7HQzKxca2sJCE1hDt4QF%2B9JOS0nbaaYDCQfwCJ7Au3AHj%2BLO13FMmm6cl7785vven0kBjHCBhfpYuNa5Ph1c0e2Xu3jEvWG7UdPDLZ4N92nOm%2BEBXuAbHmIMSRMs%2B4aUEd4Nd3CHD8NdvOLTsA2GL8M9PODbcL%2BhD7C1xoaHeLJSEao0FEW14ckxC%2BTU8TxvsY6X0eLPmRhry2WVioLpkrbp84LLQPGI7c6sOiUzpWIWS5GzlSgUzzLBSikOPFTOXqly7rqx0Z1Q5BAIoZBSFihQYQOOBEdkCOgXTOHA07HAGjGWiIjaPZNW13%2F%2Blm6S9FT7rLHFJ6fQbkATOG1j2OFMucKJJsxIVfQORl%2B9Jyda6Sl1dUYhSCm1dyClfoeDve4qMYdLEbfqHf3O%2FAdDumsjAAB42mNgYoAAZQYjBmyAGYQZmdhL8zLdDEydARfoAqIAAAABAAMABwAKABMAB%2F%2F%2FAA8AAQAAAAAAAAAAAAAAAAABAAAAAA%3D%3D%29%20format%28%27woff%27%29%3B%0A%7D%0Abody%20%7B%0A%2Dwebkit%2Dtext%2Dsize%2Dadjust%3A%20100%25%3B%0Atext%2Dsize%2Dadjust%3A%20100%25%3B%0Acolor%3A%20%23333%3B%0Afont%2Dfamily%3A%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20%22Segoe%20UI%22%2C%20Arial%2C%20freesans%2C%20sans%2Dserif%2C%20%22Apple%20Color%20Emoji%22%2C%20%22Segoe%20UI%20Emoji%22%2C%20%22Segoe%20UI%20Symbol%22%3B%0Afont%2Dsize%3A%2016px%3B%0Aline%2Dheight%3A%201%2E6%3B%0Aword%2Dwrap%3A%20break%2Dword%3B%0A%7D%0Aa%20%7B%0Abackground%2Dcolor%3A%20transparent%3B%0A%7D%0Aa%3Aactive%2C%0Aa%3Ahover%20%7B%0Aoutline%3A%200%3B%0A%7D%0Astrong%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Ah1%20%7B%0Afont%2Dsize%3A%202em%3B%0Amargin%3A%200%2E67em%200%3B%0A%7D%0Aimg%20%7B%0Aborder%3A%200%3B%0A%7D%0Ahr%20%7B%0Abox%2Dsizing%3A%20content%2Dbox%3B%0Aheight%3A%200%3B%0A%7D%0Apre%20%7B%0Aoverflow%3A%20auto%3B%0A%7D%0Acode%2C%0Akbd%2C%0Apre%20%7B%0Afont%2Dfamily%3A%20monospace%2C%20monospace%3B%0Afont%2Dsize%3A%201em%3B%0A%7D%0Ainput%20%7B%0Acolor%3A%20inherit%3B%0Afont%3A%20inherit%3B%0Amargin%3A%200%3B%0A%7D%0Ahtml%20input%5Bdisabled%5D%20%7B%0Acursor%3A%20default%3B%0A%7D%0Ainput%20%7B%0Aline%2Dheight%3A%20normal%3B%0A%7D%0Ainput%5Btype%3D%22checkbox%22%5D%20%7B%0Abox%2Dsizing%3A%20border%2Dbox%3B%0Apadding%3A%200%3B%0A%7D%0Atable%20%7B%0Aborder%2Dcollapse%3A%20collapse%3B%0Aborder%2Dspacing%3A%200%3B%0A%7D%0Atd%2C%0Ath%20%7B%0Apadding%3A%200%3B%0A%7D%0A%2A%20%7B%0Abox%2Dsizing%3A%20border%2Dbox%3B%0A%7D%0Ainput%20%7B%0Afont%3A%2013px%20%2F%201%2E4%20Helvetica%2C%20arial%2C%20nimbussansl%2C%20liberationsans%2C%20freesans%2C%20clean%2C%20sans%2Dserif%2C%20%22Apple%20Color%20Emoji%22%2C%20%22Segoe%20UI%20Emoji%22%2C%20%22Segoe%20UI%20Symbol%22%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%234078c0%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%2C%0Aa%3Aactive%20%7B%0Atext%2Ddecoration%3A%20underline%3B%0A%7D%0Ahr%20%7B%0Aheight%3A%200%3B%0Amargin%3A%2015px%200%3B%0Aoverflow%3A%20hidden%3B%0Abackground%3A%20transparent%3B%0Aborder%3A%200%3B%0Aborder%2Dbottom%3A%201px%20solid%20%23ddd%3B%0A%7D%0Ahr%3Abefore%20%7B%0Adisplay%3A%20table%3B%0Acontent%3A%20%22%22%3B%0A%7D%0Ahr%3Aafter%20%7B%0Adisplay%3A%20table%3B%0Aclear%3A%20both%3B%0Acontent%3A%20%22%22%3B%0A%7D%0Ah1%2C%0Ah2%2C%0Ah3%2C%0Ah4%2C%0Ah5%2C%0Ah6%20%7B%0Amargin%2Dtop%3A%2015px%3B%0Amargin%2Dbottom%3A%2015px%3B%0Aline%2Dheight%3A%201%2E1%3B%0A%7D%0Ah1%20%7B%0Afont%2Dsize%3A%2030px%3B%0A%7D%0Ah2%20%7B%0Afont%2Dsize%3A%2021px%3B%0A%7D%0Ah3%20%7B%0Afont%2Dsize%3A%2016px%3B%0A%7D%0Ah4%20%7B%0Afont%2Dsize%3A%2014px%3B%0A%7D%0Ah5%20%7B%0Afont%2Dsize%3A%2012px%3B%0A%7D%0Ah6%20%7B%0Afont%2Dsize%3A%2011px%3B%0A%7D%0Ablockquote%20%7B%0Amargin%3A%200%3B%0A%7D%0Aul%2C%0Aol%20%7B%0Apadding%3A%200%3B%0Amargin%2Dtop%3A%200%3B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Aol%20ol%2C%0Aul%20ol%20%7B%0Alist%2Dstyle%2Dtype%3A%20lower%2Droman%3B%0A%7D%0Aul%20ul%20ol%2C%0Aul%20ol%20ol%2C%0Aol%20ul%20ol%2C%0Aol%20ol%20ol%20%7B%0Alist%2Dstyle%2Dtype%3A%20lower%2Dalpha%3B%0A%7D%0Add%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20%22Liberation%20Mono%22%2C%20Menlo%2C%20Courier%2C%20monospace%3B%0Afont%2Dsize%3A%2012px%3B%0A%7D%0Apre%20%7B%0Amargin%2Dtop%3A%200%3B%0Amargin%2Dbottom%3A%200%3B%0Afont%3A%2012px%20Consolas%2C%20%22Liberation%20Mono%22%2C%20Menlo%2C%20Courier%2C%20monospace%3B%0A%7D%0A%2Eselect%3A%3A%2Dms%2Dexpand%20%7B%0Aopacity%3A%200%3B%0A%7D%0A%2Eocticon%20%7B%0Afont%3A%20normal%20normal%20normal%2016px%2F1%20octicons%2Dlink%3B%0Adisplay%3A%20inline%2Dblock%3B%0Atext%2Ddecoration%3A%20none%3B%0Atext%2Drendering%3A%20auto%3B%0A%2Dwebkit%2Dfont%2Dsmoothing%3A%20antialiased%3B%0A%2Dmoz%2Dosx%2Dfont%2Dsmoothing%3A%20grayscale%3B%0A%2Dwebkit%2Duser%2Dselect%3A%20none%3B%0A%2Dmoz%2Duser%2Dselect%3A%20none%3B%0A%2Dms%2Duser%2Dselect%3A%20none%3B%0Auser%2Dselect%3A%20none%3B%0A%7D%0A%2Eocticon%2Dlink%3Abefore%20%7B%0Acontent%3A%20%27%5Cf05c%27%3B%0A%7D%0A%2Emarkdown%2Dbody%3Abefore%20%7B%0Adisplay%3A%20table%3B%0Acontent%3A%20%22%22%3B%0A%7D%0A%2Emarkdown%2Dbody%3Aafter%20%7B%0Adisplay%3A%20table%3B%0Aclear%3A%20both%3B%0Acontent%3A%20%22%22%3B%0A%7D%0A%2Emarkdown%2Dbody%3E%2A%3Afirst%2Dchild%20%7B%0Amargin%2Dtop%3A%200%20%21important%3B%0A%7D%0A%2Emarkdown%2Dbody%3E%2A%3Alast%2Dchild%20%7B%0Amargin%2Dbottom%3A%200%20%21important%3B%0A%7D%0Aa%3Anot%28%5Bhref%5D%29%20%7B%0Acolor%3A%20inherit%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0A%2Eanchor%20%7B%0Adisplay%3A%20inline%2Dblock%3B%0Apadding%2Dright%3A%202px%3B%0Amargin%2Dleft%3A%20%2D18px%3B%0A%7D%0A%2Eanchor%3Afocus%20%7B%0Aoutline%3A%20none%3B%0A%7D%0Ah1%2C%0Ah2%2C%0Ah3%2C%0Ah4%2C%0Ah5%2C%0Ah6%20%7B%0Amargin%2Dtop%3A%201em%3B%0Amargin%2Dbottom%3A%2016px%3B%0Afont%2Dweight%3A%20bold%3B%0Aline%2Dheight%3A%201%2E4%3B%0A%7D%0Ah1%20%2Eocticon%2Dlink%2C%0Ah2%20%2Eocticon%2Dlink%2C%0Ah3%20%2Eocticon%2Dlink%2C%0Ah4%20%2Eocticon%2Dlink%2C%0Ah5%20%2Eocticon%2Dlink%2C%0Ah6%20%2Eocticon%2Dlink%20%7B%0Acolor%3A%20%23000%3B%0Avertical%2Dalign%3A%20middle%3B%0Avisibility%3A%20hidden%3B%0A%7D%0Ah1%3Ahover%20%2Eanchor%2C%0Ah2%3Ahover%20%2Eanchor%2C%0Ah3%3Ahover%20%2Eanchor%2C%0Ah4%3Ahover%20%2Eanchor%2C%0Ah5%3Ahover%20%2Eanchor%2C%0Ah6%3Ahover%20%2Eanchor%20%7B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Ah1%3Ahover%20%2Eanchor%20%2Eocticon%2Dlink%2C%0Ah2%3Ahover%20%2Eanchor%20%2Eocticon%2Dlink%2C%0Ah3%3Ahover%20%2Eanchor%20%2Eocticon%2Dlink%2C%0Ah4%3Ahover%20%2Eanchor%20%2Eocticon%2Dlink%2C%0Ah5%3Ahover%20%2Eanchor%20%2Eocticon%2Dlink%2C%0Ah6%3Ahover%20%2Eanchor%20%2Eocticon%2Dlink%20%7B%0Avisibility%3A%20visible%3B%0A%7D%0Ah1%20%7B%0Apadding%2Dbottom%3A%200%2E3em%3B%0Afont%2Dsize%3A%202%2E25em%3B%0Aline%2Dheight%3A%201%2E2%3B%0Aborder%2Dbottom%3A%201px%20solid%20%23eee%3B%0A%7D%0Ah1%20%2Eanchor%20%7B%0Aline%2Dheight%3A%201%3B%0A%7D%0Ah2%20%7B%0Apadding%2Dbottom%3A%200%2E3em%3B%0Afont%2Dsize%3A%201%2E75em%3B%0Aline%2Dheight%3A%201%2E225%3B%0Aborder%2Dbottom%3A%201px%20solid%20%23eee%3B%0A%7D%0Ah2%20%2Eanchor%20%7B%0Aline%2Dheight%3A%201%3B%0A%7D%0Ah3%20%7B%0Afont%2Dsize%3A%201%2E5em%3B%0Aline%2Dheight%3A%201%2E43%3B%0A%7D%0Ah3%20%2Eanchor%20%7B%0Aline%2Dheight%3A%201%2E2%3B%0A%7D%0Ah4%20%7B%0Afont%2Dsize%3A%201%2E25em%3B%0A%7D%0Ah4%20%2Eanchor%20%7B%0Aline%2Dheight%3A%201%2E2%3B%0A%7D%0Ah5%20%7B%0Afont%2Dsize%3A%201em%3B%0A%7D%0Ah5%20%2Eanchor%20%7B%0Aline%2Dheight%3A%201%2E1%3B%0A%7D%0Ah6%20%7B%0Afont%2Dsize%3A%201em%3B%0Acolor%3A%20%23777%3B%0A%7D%0Ah6%20%2Eanchor%20%7B%0Aline%2Dheight%3A%201%2E1%3B%0A%7D%0Ap%2C%0Ablockquote%2C%0Aul%2C%0Aol%2C%0Adl%2C%0Atable%2C%0Apre%20%7B%0Amargin%2Dtop%3A%200%3B%0Amargin%2Dbottom%3A%2016px%3B%0A%7D%0Ahr%20%7B%0Aheight%3A%204px%3B%0Apadding%3A%200%3B%0Amargin%3A%2016px%200%3B%0Abackground%2Dcolor%3A%20%23e7e7e7%3B%0Aborder%3A%200%20none%3B%0A%7D%0Aul%2C%0Aol%20%7B%0Apadding%2Dleft%3A%202em%3B%0A%7D%0Aul%20ul%2C%0Aul%20ol%2C%0Aol%20ol%2C%0Aol%20ul%20%7B%0Amargin%2Dtop%3A%200%3B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Ali%3Ep%20%7B%0Amargin%2Dtop%3A%2016px%3B%0A%7D%0Adl%20%7B%0Apadding%3A%200%3B%0A%7D%0Adl%20dt%20%7B%0Apadding%3A%200%3B%0Amargin%2Dtop%3A%2016px%3B%0Afont%2Dsize%3A%201em%3B%0Afont%2Dstyle%3A%20italic%3B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Adl%20dd%20%7B%0Apadding%3A%200%2016px%3B%0Amargin%2Dbottom%3A%2016px%3B%0A%7D%0Ablockquote%20%7B%0Apadding%3A%200%2015px%3B%0Acolor%3A%20%23777%3B%0Aborder%2Dleft%3A%204px%20solid%20%23ddd%3B%0A%7D%0Ablockquote%3E%3Afirst%2Dchild%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Ablockquote%3E%3Alast%2Dchild%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Atable%20%7B%0Adisplay%3A%20block%3B%0Awidth%3A%20100%25%3B%0Aoverflow%3A%20auto%3B%0Aword%2Dbreak%3A%20normal%3B%0Aword%2Dbreak%3A%20keep%2Dall%3B%0A%7D%0Atable%20th%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Atable%20th%2C%0Atable%20td%20%7B%0Apadding%3A%206px%2013px%3B%0Aborder%3A%201px%20solid%20%23ddd%3B%0A%7D%0Atable%20tr%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Aborder%2Dtop%3A%201px%20solid%20%23ccc%3B%0A%7D%0Atable%20tr%3Anth%2Dchild%282n%29%20%7B%0Abackground%2Dcolor%3A%20%23f8f8f8%3B%0A%7D%0Aimg%20%7B%0Amax%2Dwidth%3A%20100%25%3B%0Abox%2Dsizing%3A%20content%2Dbox%3B%0Abackground%2Dcolor%3A%20%23fff%3B%0A%7D%0Acode%20%7B%0Apadding%3A%200%3B%0Apadding%2Dtop%3A%200%2E2em%3B%0Apadding%2Dbottom%3A%200%2E2em%3B%0Amargin%3A%200%3B%0Afont%2Dsize%3A%2085%25%3B%0Abackground%2Dcolor%3A%20rgba%280%2C0%2C0%2C0%2E04%29%3B%0Aborder%2Dradius%3A%203px%3B%0A%7D%0Acode%3Abefore%2C%0Acode%3Aafter%20%7B%0Aletter%2Dspacing%3A%20%2D0%2E2em%3B%0Acontent%3A%20%22%5C00a0%22%3B%0A%7D%0Apre%3Ecode%20%7B%0Apadding%3A%200%3B%0Amargin%3A%200%3B%0Afont%2Dsize%3A%20100%25%3B%0Aword%2Dbreak%3A%20normal%3B%0Awhite%2Dspace%3A%20pre%3B%0Abackground%3A%20transparent%3B%0Aborder%3A%200%3B%0A%7D%0A%2Ehighlight%20%7B%0Amargin%2Dbottom%3A%2016px%3B%0A%7D%0A%2Ehighlight%20pre%2C%0Apre%20%7B%0Apadding%3A%2016px%3B%0Aoverflow%3A%20auto%3B%0Afont%2Dsize%3A%2085%25%3B%0Aline%2Dheight%3A%201%2E45%3B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0A%7D%0A%2Ehighlight%20pre%20%7B%0Amargin%2Dbottom%3A%200%3B%0Aword%2Dbreak%3A%20normal%3B%0A%7D%0Apre%20%7B%0Aword%2Dwrap%3A%20normal%3B%0A%7D%0Apre%20code%20%7B%0Adisplay%3A%20inline%3B%0Amax%2Dwidth%3A%20initial%3B%0Apadding%3A%200%3B%0Amargin%3A%200%3B%0Aoverflow%3A%20initial%3B%0Aline%2Dheight%3A%20inherit%3B%0Aword%2Dwrap%3A%20normal%3B%0Abackground%2Dcolor%3A%20transparent%3B%0Aborder%3A%200%3B%0A%7D%0Apre%20code%3Abefore%2C%0Apre%20code%3Aafter%20%7B%0Acontent%3A%20normal%3B%0A%7D%0Akbd%20%7B%0Adisplay%3A%20inline%2Dblock%3B%0Apadding%3A%203px%205px%3B%0Afont%2Dsize%3A%2011px%3B%0Aline%2Dheight%3A%2010px%3B%0Acolor%3A%20%23555%3B%0Avertical%2Dalign%3A%20middle%3B%0Abackground%2Dcolor%3A%20%23fcfcfc%3B%0Aborder%3A%20solid%201px%20%23ccc%3B%0Aborder%2Dbottom%2Dcolor%3A%20%23bbb%3B%0Aborder%2Dradius%3A%203px%3B%0Abox%2Dshadow%3A%20inset%200%20%2D1px%200%20%23bbb%3B%0A%7D%0A%2Epl%2Dc%20%7B%0Acolor%3A%20%23969896%3B%0A%7D%0A%2Epl%2Dc1%2C%0A%2Epl%2Ds%20%2Epl%2Dv%20%7B%0Acolor%3A%20%230086b3%3B%0A%7D%0A%2Epl%2De%2C%0A%2Epl%2Den%20%7B%0Acolor%3A%20%23795da3%3B%0A%7D%0A%2Epl%2Ds%20%2Epl%2Ds1%2C%0A%2Epl%2Dsmi%20%7B%0Acolor%3A%20%23333%3B%0A%7D%0A%2Epl%2Dent%20%7B%0Acolor%3A%20%2363a35c%3B%0A%7D%0A%2Epl%2Dk%20%7B%0Acolor%3A%20%23a71d5d%3B%0A%7D%0A%2Epl%2Dpds%2C%0A%2Epl%2Ds%2C%0A%2Epl%2Ds%20%2Epl%2Dpse%20%2Epl%2Ds1%2C%0A%2Epl%2Dsr%2C%0A%2Epl%2Dsr%20%2Epl%2Dcce%2C%0A%2Epl%2Dsr%20%2Epl%2Dsra%2C%0A%2Epl%2Dsr%20%2Epl%2Dsre%20%7B%0Acolor%3A%20%23183691%3B%0A%7D%0A%2Epl%2Dv%20%7B%0Acolor%3A%20%23ed6a43%3B%0A%7D%0A%2Epl%2Did%20%7B%0Acolor%3A%20%23b52a1d%3B%0A%7D%0A%2Epl%2Dii%20%7B%0Abackground%2Dcolor%3A%20%23b52a1d%3B%0Acolor%3A%20%23f8f8f8%3B%0A%7D%0A%2Epl%2Dsr%20%2Epl%2Dcce%20%7B%0Acolor%3A%20%2363a35c%3B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0A%2Epl%2Dml%20%7B%0Acolor%3A%20%23693a17%3B%0A%7D%0A%2Epl%2Dmh%2C%0A%2Epl%2Dmh%20%2Epl%2Den%2C%0A%2Epl%2Dms%20%7B%0Acolor%3A%20%231d3e81%3B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0A%2Epl%2Dmq%20%7B%0Acolor%3A%20%23008080%3B%0A%7D%0A%2Epl%2Dmi%20%7B%0Acolor%3A%20%23333%3B%0Afont%2Dstyle%3A%20italic%3B%0A%7D%0A%2Epl%2Dmb%20%7B%0Acolor%3A%20%23333%3B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0A%2Epl%2Dmd%20%7B%0Abackground%2Dcolor%3A%20%23ffecec%3B%0Acolor%3A%20%23bd2c00%3B%0A%7D%0A%2Epl%2Dmi1%20%7B%0Abackground%2Dcolor%3A%20%23eaffea%3B%0Acolor%3A%20%2355a532%3B%0A%7D%0A%2Epl%2Dmdr%20%7B%0Acolor%3A%20%23795da3%3B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0A%2Epl%2Dmo%20%7B%0Acolor%3A%20%231d3e81%3B%0A%7D%0Akbd%20%7B%0Adisplay%3A%20inline%2Dblock%3B%0Apadding%3A%203px%205px%3B%0Afont%3A%2011px%20Consolas%2C%20%22Liberation%20Mono%22%2C%20Menlo%2C%20Courier%2C%20monospace%3B%0Aline%2Dheight%3A%2010px%3B%0Acolor%3A%20%23555%3B%0Avertical%2Dalign%3A%20middle%3B%0Abackground%2Dcolor%3A%20%23fcfcfc%3B%0Aborder%3A%20solid%201px%20%23ccc%3B%0Aborder%2Dbottom%2Dcolor%3A%20%23bbb%3B%0Aborder%2Dradius%3A%203px%3B%0Abox%2Dshadow%3A%20inset%200%20%2D1px%200%20%23bbb%3B%0A%7D%0A%2Etask%2Dlist%2Ditem%20%7B%0Alist%2Dstyle%2Dtype%3A%20none%3B%0A%7D%0A%2Etask%2Dlist%2Ditem%2B%2Etask%2Dlist%2Ditem%20%7B%0Amargin%2Dtop%3A%203px%3B%0A%7D%0A%2Etask%2Dlist%2Ditem%20input%20%7B%0Amargin%3A%200%200%2E35em%200%2E25em%20%2D1%2E6em%3B%0Avertical%2Dalign%3A%20middle%3B%0A%7D%0A%3Achecked%2B%2Eradio%2Dlabel%20%7B%0Az%2Dindex%3A%201%3B%0Aposition%3A%20relative%3B%0Aborder%2Dcolor%3A%20%234078c0%3B%0A%7D%0A%2EsourceLine%20%7B%0Adisplay%3A%20inline%2Dblock%3B%0A%7D%0Acode%20%2Ekw%20%7B%20color%3A%20%23000000%3B%20%7D%0Acode%20%2Edt%20%7B%20color%3A%20%23ed6a43%3B%20%7D%0Acode%20%2Edv%20%7B%20color%3A%20%23009999%3B%20%7D%0Acode%20%2Ebn%20%7B%20color%3A%20%23009999%3B%20%7D%0Acode%20%2Efl%20%7B%20color%3A%20%23009999%3B%20%7D%0Acode%20%2Ech%20%7B%20color%3A%20%23009999%3B%20%7D%0Acode%20%2Est%20%7B%20color%3A%20%23183691%3B%20%7D%0Acode%20%2Eco%20%7B%20color%3A%20%23969896%3B%20%7D%0Acode%20%2Eot%20%7B%20color%3A%20%230086b3%3B%20%7D%0Acode%20%2Eal%20%7B%20color%3A%20%23a61717%3B%20%7D%0Acode%20%2Efu%20%7B%20color%3A%20%2363a35c%3B%20%7D%0Acode%20%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%0Acode%20%2Ewa%20%7B%20color%3A%20%23000000%3B%20%7D%0Acode%20%2Ecn%20%7B%20color%3A%20%23008080%3B%20%7D%0Acode%20%2Esc%20%7B%20color%3A%20%23008080%3B%20%7D%0Acode%20%2Evs%20%7B%20color%3A%20%23183691%3B%20%7D%0Acode%20%2Ess%20%7B%20color%3A%20%23183691%3B%20%7D%0Acode%20%2Eim%20%7B%20color%3A%20%23000000%3B%20%7D%0Acode%20%2Eva%20%7Bcolor%3A%20%23008080%3B%20%7D%0Acode%20%2Ecf%20%7B%20color%3A%20%23000000%3B%20%7D%0Acode%20%2Eop%20%7B%20color%3A%20%23000000%3B%20%7D%0Acode%20%2Ebu%20%7B%20color%3A%20%23000000%3B%20%7D%0Acode%20%2Eex%20%7B%20color%3A%20%23000000%3B%20%7D%0Acode%20%2Epp%20%7B%20color%3A%20%23999999%3B%20%7D%0Acode%20%2Eat%20%7B%20color%3A%20%23008080%3B%20%7D%0Acode%20%2Edo%20%7B%20color%3A%20%23969896%3B%20%7D%0Acode%20%2Ean%20%7B%20color%3A%20%23008080%3B%20%7D%0Acode%20%2Ecv%20%7B%20color%3A%20%23008080%3B%20%7D%0Acode%20%2Ein%20%7B%20color%3A%20%23008080%3B%20%7D%0A" rel="stylesheet">
+<style>
+body {
+  box-sizing: border-box;
+  min-width: 200px;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 45px;
+  padding-top: 0px;
+}
+</style>
+
+</head>
+
+<body>
+
+<p>Jenny Bryan<br />
+30 October, 2018</p>
+<p><strong>NOT UPDATED FOR 2016 AND THE TIDYVERSE YET!</strong></p>
+<p>This material is not part of the lesson. But it may be helpful when tidying data in real life.</p>
+<h2 id="more-about-rbinding-data-frames">More about <code>rbind()</code>ing data frames</h2>
+<p>In <a href="02-gather.md">the main tidy lesson</a>, the first step was to stack up <code>Film</code>-specific data frames row-wise. First I redo that, then present alternative methods for <code>rbind()</code>ing data frames.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fship &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="kw">file.path</span>(<span class="st">&quot;data&quot;</span>, <span class="st">&quot;The_Fellowship_Of_The_Ring.csv&quot;</span>))
+ttow &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="kw">file.path</span>(<span class="st">&quot;data&quot;</span>, <span class="st">&quot;The_Two_Towers.csv&quot;</span>))
+rking &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="kw">file.path</span>(<span class="st">&quot;data&quot;</span>, <span class="st">&quot;The_Return_Of_The_King.csv&quot;</span>))  
+lotr_untidy &lt;-<span class="st"> </span><span class="kw">rbind</span>(fship, ttow, rking)</code></pre></div>
+<p>Note that the 3 underlying data frames are hard-wired into this command: <code>rbind(fship, ttow, rking)</code>. In real life, this can become very cumbersome and even impossible, if there is a large number of data frames that need to be combined. Things get challenging for two reasons:</p>
+<ul>
+<li>listing the data frames explicitly can be a drag and error prone</li>
+<li>the actual <code>rbind()</code>ing can take lots of memory and time</li>
+</ul>
+<h3 id="memory-efficient-row-binding">Memory efficient row-binding</h3>
+<p>The <code>dplyr</code> package offers the function <code>rbind_list()</code> as an efficient substitute for the base <code>rbind()</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">suppressPackageStartupMessages</span>(<span class="kw">library</span>(dplyr))
+lotr_untidy_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">rbind_list</span>(fship, ttow, rking)
+<span class="co">#&gt; Warning: 'rbind_list' is deprecated.</span>
+<span class="co">#&gt; Use 'bind_rows()' instead.</span>
+<span class="co">#&gt; See help(&quot;Deprecated&quot;)</span>
+<span class="co">#&gt; Warning in bind_rows_(list_or_dots(...), id = NULL): Unequal factor levels:</span>
+<span class="co">#&gt; coercing to character</span>
+<span class="co">#&gt; Warning in bind_rows_(list_or_dots(...), id = NULL): binding character and</span>
+<span class="co">#&gt; factor vector, coercing into character vector</span>
+
+<span class="co">#&gt; Warning in bind_rows_(list_or_dots(...), id = NULL): binding character and</span>
+<span class="co">#&gt; factor vector, coercing into character vector</span>
+
+<span class="co">#&gt; Warning in bind_rows_(list_or_dots(...), id = NULL): binding character and</span>
+<span class="co">#&gt; factor vector, coercing into character vector</span></code></pre></div>
+<p>We get a warning about row-binding data frames with factors that don't have the same levels (here, the <code>Film</code> factor). The base function <code>rbind()</code> handles this by taking the union of factor levels, whereas <code>dplyr::rbind_list()</code> converts the affected factor to character.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(lotr_untidy)
+<span class="co">#&gt; 'data.frame':    9 obs. of  4 variables:</span>
+<span class="co">#&gt;  $ Film  : Factor w/ 3 levels &quot;The Fellowship Of The Ring&quot;,..: 1 1 1 2 2 2 3 3 3</span>
+<span class="co">#&gt;  $ Race  : Factor w/ 3 levels &quot;Elf&quot;,&quot;Hobbit&quot;,..: 1 2 3 1 2 3 1 2 3</span>
+<span class="co">#&gt;  $ Female: int  1229 14 0 331 0 401 183 2 268</span>
+<span class="co">#&gt;  $ Male  : int  971 3644 1995 513 2463 3589 510 2673 2459</span>
+<span class="kw">str</span>(lotr_untidy_<span class="dv">2</span>)
+<span class="co">#&gt; Classes 'tbl_df', 'tbl' and 'data.frame':    9 obs. of  4 variables:</span>
+<span class="co">#&gt;  $ Film  : chr  &quot;The Fellowship Of The Ring&quot; &quot;The Fellowship Of The Ring&quot; &quot;The Fellowship Of The Ring&quot; &quot;The Two Towers&quot; ...</span>
+<span class="co">#&gt;  $ Race  : Factor w/ 3 levels &quot;Elf&quot;,&quot;Hobbit&quot;,..: 1 2 3 1 2 3 1 2 3</span>
+<span class="co">#&gt;  $ Female: int  1229 14 0 331 0 401 183 2 268</span>
+<span class="co">#&gt;  $ Male  : int  971 3644 1995 513 2463 3589 510 2673 2459</span></code></pre></div>
+<p>It is easy to make <code>Film</code> back into a factor:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lotr_untidy_<span class="dv">2</span><span class="op">$</span>Film &lt;-
+<span class="st">  </span><span class="kw">factor</span>(lotr_untidy_<span class="dv">2</span><span class="op">$</span>Film,
+         <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;The Fellowship Of The Ring&quot;</span>, <span class="st">&quot;The Two Towers&quot;</span>,
+                    <span class="st">&quot;The Return Of The King&quot;</span>))</code></pre></div>
+<p>The advantage of <code>dplyr::rbind_list()</code> over base <code>rbind()</code> will become apparent when the data frames you are row-binding are large and/or numerous.</p>
+<h3 id="row-binding-a-list-of-data-frames">Row-binding a list of data frames</h3>
+<p>Frequently the data frames destined for row-binding are collected together in a list. Here are several ways to proceed, starting with the most primitive.</p>
+<p>To prepare, we collect the <code>Film</code>-specific data frames into a single list.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lotr_files &lt;-<span class="st"> </span><span class="kw">file.path</span>(<span class="st">&quot;data&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;The_Fellowship_Of_The_Ring.csv&quot;</span>,
+                                  <span class="st">&quot;The_Two_Towers.csv&quot;</span>,
+                                  <span class="st">&quot;The_Return_Of_The_King.csv&quot;</span>))
+lotr_list &lt;-<span class="st"> </span><span class="kw">lapply</span>(lotr_files, read.csv)
+<span class="kw">str</span>(lotr_list)
+<span class="co">#&gt; List of 3</span>
+<span class="co">#&gt;  $ :'data.frame':    3 obs. of  4 variables:</span>
+<span class="co">#&gt;   ..$ Film  : Factor w/ 1 level &quot;The Fellowship Of The Ring&quot;: 1 1 1</span>
+<span class="co">#&gt;   ..$ Race  : Factor w/ 3 levels &quot;Elf&quot;,&quot;Hobbit&quot;,..: 1 2 3</span>
+<span class="co">#&gt;   ..$ Female: int [1:3] 1229 14 0</span>
+<span class="co">#&gt;   ..$ Male  : int [1:3] 971 3644 1995</span>
+<span class="co">#&gt;  $ :'data.frame':    3 obs. of  4 variables:</span>
+<span class="co">#&gt;   ..$ Film  : Factor w/ 1 level &quot;The Two Towers&quot;: 1 1 1</span>
+<span class="co">#&gt;   ..$ Race  : Factor w/ 3 levels &quot;Elf&quot;,&quot;Hobbit&quot;,..: 1 2 3</span>
+<span class="co">#&gt;   ..$ Female: int [1:3] 331 0 401</span>
+<span class="co">#&gt;   ..$ Male  : int [1:3] 513 2463 3589</span>
+<span class="co">#&gt;  $ :'data.frame':    3 obs. of  4 variables:</span>
+<span class="co">#&gt;   ..$ Film  : Factor w/ 1 level &quot;The Return Of The King&quot;: 1 1 1</span>
+<span class="co">#&gt;   ..$ Race  : Factor w/ 3 levels &quot;Elf&quot;,&quot;Hobbit&quot;,..: 1 2 3</span>
+<span class="co">#&gt;   ..$ Female: int [1:3] 183 2 268</span>
+<span class="co">#&gt;   ..$ Male  : int [1:3] 510 2673 2459</span></code></pre></div>
+<p>FYI, <code>lapply()</code> is one of the base R functions for data aggregation; it iteratively applies a function to each element of a vector.</p>
+<h4 id="base-r-brute-force">Base R, brute force</h4>
+<p>We can use <code>rbind()</code> as before and give each data frame explicitly by specifying the 1st, 2nd, and 3rd elements of the list.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lotr_untidy_<span class="dv">3</span> &lt;-<span class="st"> </span><span class="kw">rbind</span>(lotr_list[[<span class="dv">1</span>]], lotr_list[[<span class="dv">2</span>]], lotr_list[[<span class="dv">3</span>]])
+<span class="kw">str</span>(lotr_untidy_<span class="dv">3</span>)
+<span class="co">#&gt; 'data.frame':    9 obs. of  4 variables:</span>
+<span class="co">#&gt;  $ Film  : Factor w/ 3 levels &quot;The Fellowship Of The Ring&quot;,..: 1 1 1 2 2 2 3 3 3</span>
+<span class="co">#&gt;  $ Race  : Factor w/ 3 levels &quot;Elf&quot;,&quot;Hobbit&quot;,..: 1 2 3 1 2 3 1 2 3</span>
+<span class="co">#&gt;  $ Female: int  1229 14 0 331 0 401 183 2 268</span>
+<span class="co">#&gt;  $ Male  : int  971 3644 1995 513 2463 3589 510 2673 2459</span></code></pre></div>
+<p>As you can imagine, this <em>really</em> does not scale well. What if there were 20 data frames in this list?!? Or 200?</p>
+<h4 id="base-r-do.call">Base R, <code>do.call()</code></h4>
+<p>The arcane-sounding function <code>do.call()</code> &quot;constructs and executes a function call from a name of a function and a list of arguments to be passed to it&quot;. Although the use of <code>do.call()</code> is not limited to <code>rbind()</code>, this is perhaps the most common use case:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lotr_untidy_<span class="dv">4</span> &lt;-<span class="st"> </span><span class="kw">do.call</span>(rbind, lotr_list)
+<span class="kw">str</span>(lotr_untidy_<span class="dv">4</span>)
+<span class="co">#&gt; 'data.frame':    9 obs. of  4 variables:</span>
+<span class="co">#&gt;  $ Film  : Factor w/ 3 levels &quot;The Fellowship Of The Ring&quot;,..: 1 1 1 2 2 2 3 3 3</span>
+<span class="co">#&gt;  $ Race  : Factor w/ 3 levels &quot;Elf&quot;,&quot;Hobbit&quot;,..: 1 2 3 1 2 3 1 2 3</span>
+<span class="co">#&gt;  $ Female: int  1229 14 0 331 0 401 183 2 268</span>
+<span class="co">#&gt;  $ Male  : int  971 3644 1995 513 2463 3589 510 2673 2459</span></code></pre></div>
+<p>This is a huge improvement over the brute force solution, because the individual data frames are no longer explicitly listed, one by one.</p>
+<h4 id="dplyrrbind_all"><code>dplyr::rbind_all()</code></h4>
+<p>The <code>dplyr</code> package offers a memory-efficient solution for row-binding a list of data.frames, namely <code>rbind_all()</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lotr_untidy_<span class="dv">5</span> &lt;-<span class="st"> </span><span class="kw">rbind_all</span>(lotr_list)
+<span class="co">#&gt; Warning: 'rbind_all' is deprecated.</span>
+<span class="co">#&gt; Use 'bind_rows()' instead.</span>
+<span class="co">#&gt; See help(&quot;Deprecated&quot;)</span>
+<span class="co">#&gt; Warning in bind_rows_(x, id = id): Unequal factor levels: coercing to</span>
+<span class="co">#&gt; character</span>
+<span class="co">#&gt; Warning in bind_rows_(x, id = id): binding character and factor vector,</span>
+<span class="co">#&gt; coercing into character vector</span>
+
+<span class="co">#&gt; Warning in bind_rows_(x, id = id): binding character and factor vector,</span>
+<span class="co">#&gt; coercing into character vector</span>
+
+<span class="co">#&gt; Warning in bind_rows_(x, id = id): binding character and factor vector,</span>
+<span class="co">#&gt; coercing into character vector</span>
+<span class="kw">str</span>(lotr_untidy_<span class="dv">5</span>)
+<span class="co">#&gt; 'data.frame':    9 obs. of  4 variables:</span>
+<span class="co">#&gt;  $ Film  : chr  &quot;The Fellowship Of The Ring&quot; &quot;The Fellowship Of The Ring&quot; &quot;The Fellowship Of The Ring&quot; &quot;The Two Towers&quot; ...</span>
+<span class="co">#&gt;  $ Race  : Factor w/ 3 levels &quot;Elf&quot;,&quot;Hobbit&quot;,..: 1 2 3 1 2 3 1 2 3</span>
+<span class="co">#&gt;  $ Female: int  1229 14 0 331 0 401 183 2 268</span>
+<span class="co">#&gt;  $ Male  : int  971 3644 1995 513 2463 3589 510 2673 2459</span></code></pre></div>
+<p>We get the same warning as before about unequal factor levels for <code>Film</code>; resolve as shown above, if you want <code>Film</code> to be factor vs character.</p>
+<p>The <code>rbind_all()</code> function from <code>dplyr</code> probably represents the best all around solution, because it addresses both pain points at once: it is memory efficient and it can operate on a list of data frames.</p>
+<h4 id="other-options">Other options</h4>
+<p>Other options for row binding data frames (and more) include the <a href="http://stackoverflow.com/questions/15673550/why-is-rbindlist-better-than-rbind"><code>rbindlist()</code> function</a> from the <a href="https://github.com/Rdatatable/data.table/"><code>data.table</code></a> package and the <code>rbind.fill()</code> function from the <code>plyr</code> package. <a href="http://rcrastinate.blogspot.ca/2013/05/the-rbinding-race-for-vs-docall-vs.html">This comparison</a> of row binding methods is informative, though it would be good to expand to include <code>data.table::rbindlist()</code> and <code>dplyr::rbind_all()</code>.</p>
+<h2 id="more-about-gathering-variables">More about gathering variables</h2>
+<p>In <a href="02-gather.md">the main tidy lesson</a>, the second step was to gather the word counts stored as separate variables for <code>Females</code> and <code>Males</code> and stack them up to make two new variables: <code>Words</code> and <code>Gender</code>.</p>
+<p>We start with the untidy data frame that results from any of the row-binding methods above.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lotr_untidy
+<span class="co">#&gt;                         Film   Race Female Male</span>
+<span class="co">#&gt; 1 The Fellowship Of The Ring    Elf   1229  971</span>
+<span class="co">#&gt; 2 The Fellowship Of The Ring Hobbit     14 3644</span>
+<span class="co">#&gt; 3 The Fellowship Of The Ring    Man      0 1995</span>
+<span class="co">#&gt; 4             The Two Towers    Elf    331  513</span>
+<span class="co">#&gt; 5             The Two Towers Hobbit      0 2463</span>
+<span class="co">#&gt; 6             The Two Towers    Man    401 3589</span>
+<span class="co">#&gt; 7     The Return Of The King    Elf    183  510</span>
+<span class="co">#&gt; 8     The Return Of The King Hobbit      2 2673</span>
+<span class="co">#&gt; 9     The Return Of The King    Man    268 2459</span></code></pre></div>
+<p>Here we repeat the <code>tidyr::gather()</code> approch from the main lesson, but also present alternatives that use no add-on packages at all and that use the more powerful <code>reshape2</code> package.</p>
+<h4 id="base-r-brute-force-1">Base R, brute force</h4>
+<p>It is entirely possible to reshape data &quot;by hand&quot;. Here we exploit R's recycling behavior to replicate the variables <code>Film</code> and <code>Race</code>. We create the new variable <code>Words</code> by concatenating <code>Female</code> and <code>Male</code> and we create a new factor <code>Gender</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lotr_tidy &lt;-
+<span class="st">  </span><span class="kw">with</span>(lotr_untidy,
+       <span class="kw">data.frame</span>(<span class="dt">Film =</span> Film,
+                  <span class="dt">Race =</span> Race,
+                  <span class="dt">Words =</span> <span class="kw">c</span>(Female, Male),
+                  <span class="dt">Gender =</span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;Female&quot;</span>, <span class="st">&quot;Male&quot;</span>), <span class="dt">each =</span> <span class="kw">nrow</span>(lotr_untidy))))
+lotr_tidy
+<span class="co">#&gt;                          Film   Race Words Gender</span>
+<span class="co">#&gt; 1  The Fellowship Of The Ring    Elf  1229 Female</span>
+<span class="co">#&gt; 2  The Fellowship Of The Ring Hobbit    14 Female</span>
+<span class="co">#&gt; 3  The Fellowship Of The Ring    Man     0 Female</span>
+<span class="co">#&gt; 4              The Two Towers    Elf   331 Female</span>
+<span class="co">#&gt; 5              The Two Towers Hobbit     0 Female</span>
+<span class="co">#&gt; 6              The Two Towers    Man   401 Female</span>
+<span class="co">#&gt; 7      The Return Of The King    Elf   183 Female</span>
+<span class="co">#&gt; 8      The Return Of The King Hobbit     2 Female</span>
+<span class="co">#&gt; 9      The Return Of The King    Man   268 Female</span>
+<span class="co">#&gt; 10 The Fellowship Of The Ring    Elf   971   Male</span>
+<span class="co">#&gt; 11 The Fellowship Of The Ring Hobbit  3644   Male</span>
+<span class="co">#&gt; 12 The Fellowship Of The Ring    Man  1995   Male</span>
+<span class="co">#&gt; 13             The Two Towers    Elf   513   Male</span>
+<span class="co">#&gt; 14             The Two Towers Hobbit  2463   Male</span>
+<span class="co">#&gt; 15             The Two Towers    Man  3589   Male</span>
+<span class="co">#&gt; 16     The Return Of The King    Elf   510   Male</span>
+<span class="co">#&gt; 17     The Return Of The King Hobbit  2673   Male</span>
+<span class="co">#&gt; 18     The Return Of The King    Man  2459   Male</span></code></pre></div>
+<h4 id="base-r-stack">Base R, <code>stack()</code></h4>
+<p>I do not consider <code>stack()</code> useful in real life, given all the alternatives. Including only for completeness.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lotr_tidy_<span class="dv">2</span> &lt;-
+<span class="st">  </span><span class="kw">with</span>(lotr_untidy,
+       <span class="kw">data.frame</span>(<span class="dt">Film =</span> Film,
+                  <span class="dt">Race =</span> Race,
+                  <span class="kw">stack</span>(lotr_untidy, <span class="kw">c</span>(Female, Male))))
+<span class="kw">names</span>(lotr_tidy_<span class="dv">2</span>) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">'Film'</span>, <span class="st">'Race'</span>, <span class="st">'Words'</span>, <span class="st">'Gender'</span>)
+lotr_tidy_<span class="dv">2</span>
+<span class="co">#&gt;                          Film   Race Words Gender</span>
+<span class="co">#&gt; 1  The Fellowship Of The Ring    Elf  1229 Female</span>
+<span class="co">#&gt; 2  The Fellowship Of The Ring Hobbit    14 Female</span>
+<span class="co">#&gt; 3  The Fellowship Of The Ring    Man     0 Female</span>
+<span class="co">#&gt; 4              The Two Towers    Elf   331 Female</span>
+<span class="co">#&gt; 5              The Two Towers Hobbit     0 Female</span>
+<span class="co">#&gt; 6              The Two Towers    Man   401 Female</span>
+<span class="co">#&gt; 7      The Return Of The King    Elf   183 Female</span>
+<span class="co">#&gt; 8      The Return Of The King Hobbit     2 Female</span>
+<span class="co">#&gt; 9      The Return Of The King    Man   268 Female</span>
+<span class="co">#&gt; 10 The Fellowship Of The Ring    Elf   971   Male</span>
+<span class="co">#&gt; 11 The Fellowship Of The Ring Hobbit  3644   Male</span>
+<span class="co">#&gt; 12 The Fellowship Of The Ring    Man  1995   Male</span>
+<span class="co">#&gt; 13             The Two Towers    Elf   513   Male</span>
+<span class="co">#&gt; 14             The Two Towers Hobbit  2463   Male</span>
+<span class="co">#&gt; 15             The Two Towers    Man  3589   Male</span>
+<span class="co">#&gt; 16     The Return Of The King    Elf   510   Male</span>
+<span class="co">#&gt; 17     The Return Of The King Hobbit  2673   Male</span>
+<span class="co">#&gt; 18     The Return Of The King    Man  2459   Male</span></code></pre></div>
+<h4 id="tidyrgather"><code>tidyr::gather()</code></h4>
+<p>This is repeated content from the main lesson.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyr)
+lotr_tidy_<span class="dv">3</span> &lt;-
+<span class="st">  </span><span class="kw">gather</span>(lotr_untidy, <span class="dt">key =</span> <span class="st">'Gender'</span>, <span class="dt">value =</span> <span class="st">'Words'</span>, Female, Male)
+lotr_tidy_<span class="dv">3</span>
+<span class="co">#&gt;                          Film   Race Gender Words</span>
+<span class="co">#&gt; 1  The Fellowship Of The Ring    Elf Female  1229</span>
+<span class="co">#&gt; 2  The Fellowship Of The Ring Hobbit Female    14</span>
+<span class="co">#&gt; 3  The Fellowship Of The Ring    Man Female     0</span>
+<span class="co">#&gt; 4              The Two Towers    Elf Female   331</span>
+<span class="co">#&gt; 5              The Two Towers Hobbit Female     0</span>
+<span class="co">#&gt; 6              The Two Towers    Man Female   401</span>
+<span class="co">#&gt; 7      The Return Of The King    Elf Female   183</span>
+<span class="co">#&gt; 8      The Return Of The King Hobbit Female     2</span>
+<span class="co">#&gt; 9      The Return Of The King    Man Female   268</span>
+<span class="co">#&gt; 10 The Fellowship Of The Ring    Elf   Male   971</span>
+<span class="co">#&gt; 11 The Fellowship Of The Ring Hobbit   Male  3644</span>
+<span class="co">#&gt; 12 The Fellowship Of The Ring    Man   Male  1995</span>
+<span class="co">#&gt; 13             The Two Towers    Elf   Male   513</span>
+<span class="co">#&gt; 14             The Two Towers Hobbit   Male  2463</span>
+<span class="co">#&gt; 15             The Two Towers    Man   Male  3589</span>
+<span class="co">#&gt; 16     The Return Of The King    Elf   Male   510</span>
+<span class="co">#&gt; 17     The Return Of The King Hobbit   Male  2673</span>
+<span class="co">#&gt; 18     The Return Of The King    Man   Male  2459</span></code></pre></div>
+<h4 id="reshape2melt"><code>reshape2::melt()</code></h4>
+<p>The <code>reshape2</code> package is more powerful than <code>tidyr</code> but also harder to use and often overkill. But some reshaping tasks are beyond the capabilities of <code>tidyr</code>, so its good to know <code>reshape2</code> is there when you need it.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(reshape2)
+lotr_tidy_<span class="dv">4</span> &lt;-
+<span class="st">  </span><span class="kw">melt</span>(lotr_untidy, <span class="dt">measure.vars =</span> <span class="kw">c</span>(<span class="st">&quot;Female&quot;</span>, <span class="st">&quot;Male&quot;</span>), <span class="dt">value.name =</span> <span class="st">'Words'</span>)
+lotr_tidy_<span class="dv">4</span>
+<span class="co">#&gt;                          Film   Race variable Words</span>
+<span class="co">#&gt; 1  The Fellowship Of The Ring    Elf   Female  1229</span>
+<span class="co">#&gt; 2  The Fellowship Of The Ring Hobbit   Female    14</span>
+<span class="co">#&gt; 3  The Fellowship Of The Ring    Man   Female     0</span>
+<span class="co">#&gt; 4              The Two Towers    Elf   Female   331</span>
+<span class="co">#&gt; 5              The Two Towers Hobbit   Female     0</span>
+<span class="co">#&gt; 6              The Two Towers    Man   Female   401</span>
+<span class="co">#&gt; 7      The Return Of The King    Elf   Female   183</span>
+<span class="co">#&gt; 8      The Return Of The King Hobbit   Female     2</span>
+<span class="co">#&gt; 9      The Return Of The King    Man   Female   268</span>
+<span class="co">#&gt; 10 The Fellowship Of The Ring    Elf     Male   971</span>
+<span class="co">#&gt; 11 The Fellowship Of The Ring Hobbit     Male  3644</span>
+<span class="co">#&gt; 12 The Fellowship Of The Ring    Man     Male  1995</span>
+<span class="co">#&gt; 13             The Two Towers    Elf     Male   513</span>
+<span class="co">#&gt; 14             The Two Towers Hobbit     Male  2463</span>
+<span class="co">#&gt; 15             The Two Towers    Man     Male  3589</span>
+<span class="co">#&gt; 16     The Return Of The King    Elf     Male   510</span>
+<span class="co">#&gt; 17     The Return Of The King Hobbit     Male  2673</span>
+<span class="co">#&gt; 18     The Return Of The King    Man     Male  2459</span></code></pre></div>
+<p>In <code>reshape2</code> jargon, we want to <code>melt()</code> the untidy LOTR data. Under the hood, since we are <code>melt()</code>ing a data frame, the function <code>melt.data.frame()</code> is what's actually used; read <a href="http://www.rdocumentation.org/packages/reshape2/functions/melt.data.frame">the documentation</a>. The first argument <code>data =</code> specifies the data frame to work on. The <code>measure.vars =</code> argument specifies the variables that should be gathered together to make a new variable -- here <code>Female</code> and <code>Male</code> word counts. The remaining variables -- <code>Film</code> and <code>Race</code> -- are assumed to be <code>id.vars</code> and will be replicated as necessary. Finally, if you want to name your new variable, indicate that via the <code>value.name =</code> argument.</p>
+<p>Since <code>melt()</code> &quot;will assume factor and character variables are id variables, and all others are measured,&quot; we could have just called it like so, but this seemed too magical to be useful for teaching!</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">melt</span>(lotr_untidy, <span class="dt">value.name =</span> <span class="st">'Words'</span>)</code></pre></div>
+<h2 id="resources">Resources</h2>
+<p><code>dplyr</code> package: on <a href="https://github.com/hadley/dplyr">GitHub</a> | an <a href="http://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html">introduction vignette</a></p>
+<p><code>data.table</code> package: on <a href="https://github.com/Rdatatable/data.table/">GitHub</a></p>
+<p><code>tidyr</code> package: on <a href="https://github.com/hadley/tidyr">GitHub</a>,</p>
+<p><code>reshape2</code> package: on <a href="https://github.com/hadley/reshape">GitHub</a></p>
+
+</body>
+</html>
