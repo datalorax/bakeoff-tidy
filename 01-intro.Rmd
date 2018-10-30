@@ -1,6 +1,6 @@
 ---
 title: "Introduction to Tidy Data"
-author: "Alison Hill"
+author: "Alison Hill & Daniel Anderson"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
   html_document:
@@ -8,10 +8,12 @@ output:
     highlight: pygments
 ---
 
-This is a lesson on tidying data, remixed from [Jenny Bryan's similar lesson using "Lord of the Rings" data](https://github.com/jennybc/lotr-tidy). Most text is Jenny's :)
+This is a lesson on tidying data, remixed from [Jenny Bryan's similar lesson using "Lord of the Rings" data](https://github.com/jennybc/lotr-tidy). Most text + code is Jenny's, basically we plopped a new dataset in there `r emo::ji("wink")`
+
+---
 
 ```{r setup, include = FALSE, cache = FALSE}
-knitr::opts_chunk$set(error = TRUE, collapse = TRUE, comment = "#>")
+knitr::opts_chunk$set(error = TRUE, collapse = TRUE, comment = "#>", warning = FALSE, message = FALSE)
 library(tidyverse)
 library(DT)
 ```
@@ -68,7 +70,7 @@ If you are struggling to make a figure, for example, stop and think hard about w
 
 ## GBBO example {.tabset}
 
-I will give you a concrete example of some untidy data I created from [this data from "The Great British Bake Off"](https://github.com/apreshill/bakeoff).
+We will give you a concrete example of some untidy data from ["The Great British Bake Off"](https://github.com/apreshill/bakeoff).
 
 ### Series 1
 
@@ -97,26 +99,26 @@ We have one table per series. In each table, we have the total number of bakes, 
 
 You could imagine finding these separate tables as separate worksheets in an Excel workbook. Or hanging out in some cells on the side of a worksheet that contains the underlying data raw data. Or as tables on a webpage or in a Word document.
 
-This data has been formatted for consumption by *human eyeballs* (paraphrasing Murrell; see Resources). The format makes it easy for a *human* to look up the number of words spoken by female elves in The Two Towers. But this format actually makes it pretty hard for a *computer* to pull out such counts and, more importantly, to compute on them or graph them.
+This data has been formatted for consumption by *human eyeballs* (paraphrasing Murrell; see Resources). The format makes it easy for a *human* to look up the number of showstopper cakes baked in Series 2. But this format actually makes it pretty hard for a *computer* to pull out such counts and, more importantly, to compute on them or graph them.
 
 ## Exercises
 
 Look at the tables above and answer these questions:
 
-  * What's the total number of cakes baked in signature challenges?
-  * Do pies and tarts dominate any series? Does the dominant type of bake differ across the series?
+  * What is the total number of cakes baked in signature challenges?
+  * Do pies and tarts dominate cakes any series? Does the dominant type of bake differ across the series?
   
-How well does your approach scale if there were many more series or if I provided you with updated data that includes all the types of possible bakes (custards, buns, etc.)?
+How well does your approach scale if there were many more series or if I provided you with updated data that includes all possible bakes (custards, buns, etc.)?
 
 ## Tidy Bake Off data
 
 Here's how the same data looks in tidy form:
 
-```{r echo = FALSE, results = 'asis'}
+```{r echo = FALSE}
 datatable(bakes_tidy)
 ```
 
-Notice that tidy data is generally taller and narrower. It doesn't fit nicely on the page. Certain elements get repeated alot, e.g. `Hobbit`. For these reasons, we often instinctively resist __tidy__ data as inefficient or ugly. But, unless and until you're making the final product for a textual presentation of data, ignore your yearning to see the data in a compact form.
+Notice that tidy data is generally taller and narrower. It doesn't fit nicely on the page. Certain elements get repeated alot, e.g. `showstopper`. For these reasons, we often instinctively resist __tidy__ data as inefficient or ugly. But, unless and until you're making the final product for a textual presentation of data, ignore your yearning to see the data in a compact form.
 
 ## Benefits of tidy data
 
@@ -131,7 +133,7 @@ bakes_tidy %>%
 #aggregate(Words ~ Gender, data = lotr_tidy, FUN = sum)
 ```
 
-Now it takes a small bit of code to compute the word total for both genders of all races across all films. The total number of words spoken by male hobbits is `r bakes_tidy %>% count(challenge, cake, wt = bakes) %>% filter(challenge == "signature", cake == "cake") %>% pull()`. It was important here to have all word counts in a single variable, within a data frame that also included a variables for gender and race.
+Now it takes a small bit of code to compute the total number of cakes for each challenge across all series. The total number of cakes baked in signature challenges is `r bakes_tidy %>% count(challenge, cake, wt = bakes) %>% filter(challenge == "signature", cake == "cake") %>% pull()`. It was important here to have all bake counts in a single variable, within a data frame that also included variables for challenge and type of bake.
 
 ####  Do pies and tarts dominate any series? Does the dominant type of bake differ across the series?
 
@@ -143,7 +145,8 @@ First, we sum across challenges, to obtain bake counts for the different series 
 ## outside the tidyverse:
 #(by_race_film <- aggregate(Words ~ Race * Film, data = lotr_tidy, FUN = sum))
 ```
-We can stare hard at those numbers to answer the question. But even nicer is to depict the word counts we just computed in a barchart. 
+
+We can stare hard at those numbers to answer the question. But even nicer is to depict the bake counts we just computed in a barchart. 
 
 ```{r barchart-bakes}
 ggplot(bakes_by_series, aes(x = series, y = n, fill = cake)) +
@@ -163,9 +166,11 @@ ggplot(bakes_by_series, aes(x = series, y = n,
 ```
 
 
-Hobbits are featured heavily in The Fellowhip of the Ring, where as Men had a lot more screen time in The Two Towers. They were equally prominent in the last movie, The Return of the King.
+So cakes are king, at least relative to pies/tarts across all series. Pies/tarts saw a spike in popularity around series 3. Cakes really surged in the last series, series 8.
 
-Again, it was important to have all the data in a single data frame, all word counts in a single variable, and associated variables for Film and Race.
+One thing missing from this data is information about total number of participants/bakes across each series, so that we can calculate proportions. 
+
+Again, it was important to have all the data in a single data frame, all bake counts in a single variable, and associated variables for challenge and type of bake.
 
 ## Take home message
 
