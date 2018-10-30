@@ -1,36 +1,145 @@
 ---
-author: "Jenny Bryan"
+title: "Spread to Tidy Data"
+author: "Alison Hill & Daniel Anderson"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
-output: github_document
+output:
+  html_document:
+    theme: flatly
+    highlight: pygments
+    toc: TRUE
+    toc_float: TRUE
+---
+
+This is a lesson on tidying/untidying data, remixed from [Jenny Bryan's similar lesson using "Lord of the Rings" data](https://github.com/jennybc/lotr-tidy). Most text + code is Jenny's, basically we plopped a new dataset in there `r emo::ji("wink")`
+
 ---
 
 ```{r setup, include = FALSE, cache = FALSE}
-knitr::opts_chunk$set(error = TRUE, collapse = TRUE, comment = "#>")
+knitr::opts_chunk$set(error = TRUE, collapse = TRUE, comment = "#>", warning = FALSE, message = FALSE)
+library(DT)
 ```
 
 Enough about tidy data. How do I make it messy?
 
-No prose yet.
+Regardless of which `gather`ing adventure you embarked upon, we'll all use the Bachelor/Bachelorette data from [538](https://github.com/fivethirtyeight/data/tree/master/bachelorette) to practice spreading.
+
+# Import & Tidy
+
+Use the following code to read in and tidy the data (Note: you'll get a bunch of parsing errors and that is OK to ignore):
+
+```{r results='hide'}
+# load package
+library(tidyverse)
+
+# import and tidy
+b_tidy <- read_csv("https://raw.githubusercontent.com/fivethirtyeight/data/master/bachelorette/bachelorette.csv",
+                         col_types = cols(SEASON = col_integer())) %>% 
+  filter(!SEASON == "SEASON") %>% 
+  select(SHOW, SEASON, CONTESTANT, starts_with("ELIMINATION")) %>% 
+  gather(key = "week", value = "eliminated", starts_with("ELIMINATION"), na.rm = TRUE) %>% 
+  mutate(week = str_replace(week, "-", "_"),
+         week = parse_number(week))
+
+```
+
+# Explore
+
+What are the possible values in the new `eliminated` column? (hint: `distinct` possible values)
+
+```{r echo = FALSE}
+# what are the distinct values in this column?
+b_tidy %>% 
+  distinct(eliminated)
+
+```
+
+What do those mean? Here is a key:
+
+- "E" connotes a standard elimination, typically at a rose ceremony. 
+- "EQ" means the contestant quits. 
+- "EF" means the contestant was fired by production. 
+- "ED" connotes a date elimination. 
+- "EU" connotes an unscheduled elimination, one that takes place at a time outside of a date or rose ceremony.
+- "R" means the contestant received a rose. 
+- "R1" means the contestant got a first impression rose.
+- "W" means the contestant won.
+
+
+
+# Count 
+
+Using that tidy data, `count` the values in your new `eliminated` column by contestant name and show.
+
+```{r echo = FALSE}
+# count eliminated by contestant name and show
+b_counts <- b_tidy %>% 
+  count(CONTESTANT, SHOW, eliminated)
+b_counts
+
+```
+
+Again, we can squint hard at this `r nrow(b_counts)` row tibble, but if we want to look at numbers like this:
+
+[](https://fivethirtyeight.com/wp-content/uploads/2017/07/koeze-hickey-bachelor-3-update.png)
+
+We need to reshape this data (again).
+
+# Spread
+
+Let's `spread` that counted data, so that we get a column for each possible value in the `eliminated` column, and those columns hold the values in the `n` column. Set `fill` to 0.
+
+```{r echo = FALSE}
+# spread eliminated counts
+first_impressions <- b_counts %>% 
+  spread(eliminated, n, fill = 0) 
+
+# make interactive table to explore
+datatable(first_impressions)
+```
+
+
+# Plot
+
+
+Make a facetted bar plot with this data to show how many winning/losing contestants (hint: `geom_col()` might be a good choice here) in each show got first impression roses.
+
+```{r echo = FALSE}
+# make facetted bar chart
+ggplot(first_impressions, aes(x = as.factor(W), y = R1)) +
+  geom_col() +
+  facet_wrap(~SHOW) +
+  labs(x = "0 = Lost, 1 = Won", y = "Contestants receiving first impression roses")
+
+```
+
+
+
+# Bonus material
+
+Calculate percentages of contestants in each show to answer what percentage of contestants that got a first impression rose were not winners?
 
 ```{r}
-library(tidyverse)
-lotr_tidy <- read_csv(file.path("data", "lotr_tidy.csv"))
+# use tidy data to calculate percentages
+(bummers <- first_impressions %>% 
+  count(SHOW, R1, W) %>% 
+  add_count(SHOW, R1, wt = n) %>% 
+  mutate(perc = n/nn * 100))
 
-lotr_tidy
-
-## practicing with spread: let's get one variable per Race
-lotr_tidy %>% 
-  spread(key = Race, value = Words)
-
-## practicing with spread: let's get one variable per Gender
-lotr_tidy %>% 
-  spread(key = Gender, value = Words)
-
-## practicing with spread ... and unite: let's get one variable per combo of Race and Gender
-lotr_tidy %>% 
-  unite(Race_Gender, Race, Gender) %>% 
-  spread(key = Race_Gender, value = Words)
-
-## to do: show splitting into film-specific data frames?
 ```
+
+Answers: Only `r bummers %>% filter(SHOW == "Bachelor", R1 == 1, W == 1) %>% pull(perc) %>% round(2)` % of Bachelor contestants who got a first impression rose won. Bachelorette contestants were a little better off: `r bummers %>% filter(SHOW == "Bachelorette", R1 == 1, W == 1) %>% pull(perc) %>% round(2)` % who got a first impression rose won.
+
+```{r}
+# plot percentages
+ggplot(first_impressions, aes(x = as.factor(SHOW), y = R1, fill = as.factor(W))) +
+  geom_col(position = "fill")
+
+```
+
+
+# Code Appendix
+
+```{r ref.label=knitr::all_labels(), echo = T, eval = F}
+```
+
 
