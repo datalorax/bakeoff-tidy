@@ -43,7 +43,8 @@ You do not need to know how the below code works- please treat it like a magic b
 
 ```{r results='hide'}
 library(tidyverse)
-bakes_untidy <- fs::dir_ls(path = here::here("data"), 
+library(here)
+bakes_untidy <- fs::dir_ls(path = here("data"), 
                           regexp = "series\\d.csv") %>% 
   purrr::map_df(readr::read_csv)
 ```
@@ -66,8 +67,8 @@ A good guiding principle is to glue the pieces together as early as possible, be
 We are still violating one of the fundamental principles of __tidy data__. "Bake count" is a fundamental variable in our dataset and it's currently spread out over two variables, `cake` and `pie_tart`. Conceptually, we need to gather up the bake counts into a single variable and create a new variable, `n_bakes`, to track whether each count refers to cakes or pies/tarts. We use the `gather()` function from the tidyr package to do this.
 
 ```{r}
-bakes_tidy <-
-  gather(bakes_untidy, key = 'type_bake', value = 'n_bakes', cake, pie_tart)
+bakes_tidy <- bakes_untidy %>% 
+  gather(key = 'type_bake', value = 'n_bakes', cake, pie_tart)
 bakes_tidy
 ```
 
@@ -80,7 +81,7 @@ To explain our call to `gather()` above, let's read it from right to left: we to
 Now we write this multi-series, tidy dataset to file for use in various downstream scripts for further analysis and visualization. This would make an excellent file to share on the web with others, providing a tool-agnostic, ready-to-analyze entry point for anyone wishing to play with this data.
 
 ```{r}
-write_csv(bakes_tidy, path = file.path("data", "bakes_tidy.csv")) 
+write_csv(bakes_tidy, path = here("data", "bakes_tidy.csv")) 
 ```
 
 You can inspect this delimited file here: [bakes_tidy.csv](data/bakes_tidy.csv).
