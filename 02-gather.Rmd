@@ -343,10 +343,5 @@ In the next lesson [03-spread](03-spread.html) I show you how to untidy data, us
   * Nine simple ways to make it easier to (re)use your data by EP White, E Baldridge, ZT Brym, KJ Locey, DJ McGlinn, SR Supp. *Ideas in Ecology and Evolution* 6(2): 1–10, 2013. doi: 10.4033/iee.2013.6b.6.f <https://ojs.library.queensu.ca/index.php/IEE/article/view/4608>
     - See the section "Use standard table formats"
   * Tidy data by Hadley Wickham. Journal of Statistical Software. Vol. 59, Issue 10, Sep 2014. <http://www.jstatsoft.org/v59/i10>
-  
-### Code Appendix
-
-```{r ref.label=knitr::all_labels(), echo = T, eval = F}
-```
-
+ 
 

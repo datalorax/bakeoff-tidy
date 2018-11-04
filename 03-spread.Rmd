@@ -136,9 +136,4 @@ ggplot(first_impressions, aes(x = as.factor(SHOW), y = R1, fill = as.factor(W)))
 ```
 
 
-# Code Appendix
-
-```{r ref.label=knitr::all_labels(), echo = T, eval = F}
-```
-
 
