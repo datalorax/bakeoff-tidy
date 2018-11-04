@@ -6,6 +6,7 @@ output:
   html_document:
     toc: TRUE
     toc_float: TRUE
+    keep_md: TRUE
 ---
 
 This is a lesson on tidying/untidying data, remixed from [Jenny Bryan's similar lesson using "Lord of the Rings" data](https://github.com/jennybc/lotr-tidy). Most text + code is Jenny's, basically we plopped a new dataset in there `r emo::ji("wink")`

@@ -6,6 +6,7 @@ output:
   html_document:
     toc: TRUE
     toc_float: TRUE
+    keep_md: TRUE
 ---
 
 This is a lesson on tidying data, remixed from [Jenny Bryan's similar lesson using "Lord of the Rings" data](https://github.com/jennybc/lotr-tidy). Most text + code is Jenny's, basically we plopped a new dataset in there `r emo::ji("wink")`
@@ -31,7 +32,7 @@ We now import the untidy data from the eight series that was presented in [the i
 
 I assume that data can be found as eight plain text, delimited files, one for each film, each with the filename `series*.csv`. How to liberate data from spreadsheets or tables in word processing documents is beyond the scope of this tutorial. 
 
-The files live here in this repo, which you could clone as a new RStudio Project. We'll use a neat trick to read in all 8 csv files at once:
+The files live [in this repo](https://github.com/apreshill/bakeoff-tidy), which you could clone as a new RStudio Project. We'll use a neat trick to read in all 8 csv files at once:
 
 <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">☝️ My first <a href="https://twitter.com/hashtag/rstats?src=hash&amp;ref_src=twsrc%5Etfw">#rstats</a> tip: use purrr::map_df() to read all .csv files in a 📂 and stick them in a single data frame:<br><br>f &lt;- list.files(<br>  &quot;my_folder&quot;,<br>   pattern = &quot;*.csv&quot;,<br>   full.names = TRUE)<br><br>d &lt;- purrr::map_df(f, readr::read_csv, .id = &quot;id&quot;) <a href="https://t.co/JWxI5ecr0k">pic.twitter.com/JWxI5ecr0k</a></p>&mdash; We are R-Ladies (@WeAreRLadies) <a href="https://twitter.com/WeAreRLadies/status/1034817323922804737?ref_src=twsrc%5Etfw">August 29, 2018</a></blockquote>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
@@ -56,7 +57,7 @@ bakes_untidy
 glimpse(bakes_untidy)
 ```
 
-Assembling one large data object from lots of little ones is common data preparation task. When the pieces are as similar as they here, it's nice to assemble them into one object right away. In other scenarios, you may need to do some remedial work on the pieces before they can be fitted together nicely.
+Assembling one large data object from lots of little ones is a common data preparation task. When the pieces are as similar as they are here, it's nice to assemble them into one object right away. In other scenarios, you may need to do some remedial work on the pieces before they can be fitted together nicely.
 
 A good guiding principle is to glue the pieces together as early as possible, because it's easier and more efficient to tidy a single object than 20 or 1000.
 
@@ -168,6 +169,8 @@ ggplot(b_roses, aes(x = SEASON)) +
 Follow along with these code prompts:
 
 * Use the following code to read in data used from the annual PDX Bike Count [538](https://github.com/fivethirtyeight/data/tree/master/bachelorette):
+
+<!-- The above link is to the 538 bachelorette. I can't seem to find the original link -->
 
 ```{r}
 # import bike data
@@ -327,16 +330,16 @@ Watch out for how __untidy__ data seduces you into working with it more than you
 
 ### Where to next?
 
-In the next lesson [03-spread](03-spread.html) I show to untidy data, using `spread()` from the tidyr package. This might be useful at the end of an analysis, for preparing figures or tables.
+In the next lesson [03-spread](03-spread.html) I show you how to untidy data, using `spread()` from the tidyr package. This might be useful at the end of an analysis, for preparing figures or tables.
 
 ### Resources
 
   * [Tidy data](http://r4ds.had.co.nz/tidy-data.html) chapter in R for Data Science, by Garrett Grolemund and Hadley Wickham
     - [tidyr](https://github.com/hadley/tidyr) R package
-    - The tidyverse meta-package, within which `tidyr` lives: [tidyverse](https://github.com/hadley/tidyversee).
+    - The tidyverse meta-package, within which `tidyr` lives: [tidyverse](https://github.com/hadley/tidyverse).
   * [Bad Data Handbook](http://shop.oreilly.com/product/0636920024422.do) by By Q. Ethan McCallum, published by O'Reilly.
     - Chapter 3: Data Intended for Human Consumption, Not Machine Consumption by Paul Murrell.
-  * Nine simple ways to make it easier to (re)use your data by EP White, E Baldridge, ZT Brym, KJ Locey, DJ McGlinn, SR Supp. *Ideas in Ecology and Evolution* 6(2): 1–10, 2013. doi:10.4033/iee.2013.6b.6.f <http://library.queensu.ca/ojs/index.php/IEE/article/view/4608>
+  * Nine simple ways to make it easier to (re)use your data by EP White, E Baldridge, ZT Brym, KJ Locey, DJ McGlinn, SR Supp. *Ideas in Ecology and Evolution* 6(2): 1–10, 2013. doi: 10.4033/iee.2013.6b.6.f <https://ojs.library.queensu.ca/index.php/IEE/article/view/4608>
     - See the section "Use standard table formats"
   * Tidy data by Hadley Wickham. Journal of Statistical Software. Vol. 59, Issue 10, Sep 2014. <http://www.jstatsoft.org/v59/i10>
   
