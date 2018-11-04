@@ -130,9 +130,17 @@ summarization or to make a figure. This assumes you're using a language that is 
 
 ```{r}
 bakes_tidy %>% 
+  group_by(challenge, cake) %>% 
+  summarize(n = sum(bakes)) %>% 
+  arrange(desc(n))
+```
+
+
+Or even more efficiently:
+
+```{r}
+bakes_tidy %>% 
  count(challenge, cake, wt = bakes, sort = TRUE)
-## outside the tidyverse:
-#aggregate(Words ~ Gender, data = lotr_tidy, FUN = sum)
 ```
 
 Now it takes a small bit of code to compute the total number of cakes for each challenge across all series. The total number of cakes baked in signature challenges is `r bakes_tidy %>% count(challenge, cake, wt = bakes) %>% filter(challenge == "signature", cake == "cake") %>% pull()`. It was important here to have all bake counts in a single variable, within a data frame that also included variables for challenge and type of bake.
@@ -144,8 +152,6 @@ First, we sum across challenges, to obtain bake counts for the different series 
 ```{r}
 (bakes_by_series <- bakes_tidy %>% 
    count(series, cake, wt = bakes))
-## outside the tidyverse:
-#(by_race_film <- aggregate(Words ~ Race * Film, data = lotr_tidy, FUN = sum))
 ```
 
 We can stare hard at those numbers to answer the question. But even nicer is to depict the bake counts we just computed in a barchart. 
